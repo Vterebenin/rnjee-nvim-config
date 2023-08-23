@@ -104,6 +104,11 @@ _G.packer_plugins = {
     path = "/home/vter/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["dressing.nvim"] = {
+    loaded = true,
+    path = "/home/vter/.local/share/nvim/site/pack/packer/start/dressing.nvim",
+    url = "https://github.com/stevearc/dressing.nvim"
+  },
   ["express_line.nvim"] = {
     loaded = true,
     path = "/home/vter/.local/share/nvim/site/pack/packer/start/express_line.nvim",
@@ -113,6 +118,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vter/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
+  },
+  ["godot.nvim"] = {
+    loaded = true,
+    path = "/home/vter/.local/share/nvim/site/pack/packer/start/godot.nvim",
+    url = "https://github.com/lommix/godot.nvim"
   },
   harpoon = {
     loaded = true,
@@ -155,6 +165,11 @@ _G.packer_plugins = {
     path = "/home/vter/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/home/vter/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/vter/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -180,6 +195,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vter/.local/share/nvim/site/pack/packer/start/rose-pine",
     url = "https://github.com/rose-pine/neovim"
+  },
+  ["rust-tools.nvim"] = {
+    loaded = true,
+    path = "/home/vter/.local/share/nvim/site/pack/packer/start/rust-tools.nvim",
+    url = "https://github.com/simrat39/rust-tools.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,

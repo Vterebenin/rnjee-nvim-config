@@ -25,6 +25,7 @@ return require('packer').startup(function(use)
   use('theprimeagen/harpoon')
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
+  use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
   use {
     'VonHeikemen/lsp-zero.nvim',
     requires = {
@@ -56,4 +57,9 @@ return require('packer').startup(function(use)
     requires = { "nvim-lua/plenary.nvim" },
   })
   use('sbdchd/neoformat');
+  use {'stevearc/dressing.nvim'}
+  use('lommix/godot.nvim')
+  use 'mfussenegger/nvim-dap'
+  use 'neovim/nvim-lspconfig'
+  use 'simrat39/rust-tools.nvim'
 end)

@@ -1,11 +1,9 @@
 local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
-
 lsp.ensure_installed({
   'tsserver',
   'eslint',
-  'sumneko_lua',
   'rust_analyzer',
 })
 
@@ -68,6 +66,7 @@ lsp.set_preferences({
 --   vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
 --   vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 -- end)
+vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 
 lsp.nvim_workspace()
 lsp.setup()
@@ -76,3 +75,30 @@ vim.diagnostic.config({
     virtual_text = true,
 })
 
+-- LSP Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
+
+-- LSP Config for Godot
+require'lspconfig'.gdscript.setup{
+  filetypes = { "gd", "gdscript", "gdscript3" },
+}
+
+require('lspconfig').rust_analyzer.setup {
+    settings = {
+        ['rust-analyzer'] = {
+            checkOnSave = {
+                allFeatures = true,
+                overrideCommand = {
+                    'cargo', 'clippy', '--workspace', '--message-format=json',
+                    '--all-targets', '--all-features'
+                }
+            }
+        }
+    }
+}

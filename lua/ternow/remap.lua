@@ -42,3 +42,19 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
+-- LSP
+function _G.runCodeAction()
+  vim.lsp.buf.code_action()
+end
+vim.api.nvim_set_keymap('n', '<leader>la', ':lua runCodeAction()<CR>', {noremap = true})
+vim.api.nvim_set_keymap('v', '<leader>la', ':lua runCodeAction()<CR>', {noremap = true})
+
+function _G.formatCode()
+  vim.lsp.buf.format {
+    filter = function(client) return client.name ~= "prettier" end
+  }
+end
+vim.api.nvim_set_keymap('n', '<leader>lf', ':lua formatCode()<CR>', {noremap = true})
+vim.api.nvim_set_keymap('v', '<leader>lf', ':lua formatCode()<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>dc', ':lua vim.diagnostic.open_float(0, {scope="line"})<CR>', {noremap = true})
+
