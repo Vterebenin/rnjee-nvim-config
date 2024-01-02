@@ -16,24 +16,21 @@ require('mason-lspconfig').setup({
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
-local cmp_mappings = lsp_zero.defaults.cmp_mappings({
-})
+local cmp_action = require('lsp-zero').cmp_action()
+
 cmp.setup({
-  mapping = {
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
     ["<C-Space>"] = cmp.mapping.complete(),
-  }
-})
-
--- disable completion with tab
--- this helps with copilot setup
-cmp_mappings['<Tab>'] = nil
-cmp_mappings['<S-Tab>'] = nil
-
-lsp_zero.setup_nvim_cmp({
-  mapping = cmp_mappings
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(4),
+  })
 })
 
 lsp_zero.set_preferences({
@@ -48,7 +45,6 @@ lsp_zero.set_preferences({
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 
-lsp_zero.nvim_workspace()
 lsp_zero.setup()
 
 vim.diagnostic.config({

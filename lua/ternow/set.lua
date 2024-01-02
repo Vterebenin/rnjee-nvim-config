@@ -28,9 +28,19 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
--- vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "80"
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
   command = 'silent! Neoformat',
   group = vim.api.nvim_create_augroup('MyAutocmdsJavaScripFormatting', {}),
 })
+
+function Open_plugin()
+    local cmd_args = vim.fn.argc()
+    if cmd_args > 0 then
+        vim.cmd('Neotree')
+    end
+end
+
+-- Automatically call the function on VimEnter
+vim.cmd('autocmd VimEnter * lua Open_plugin()')

@@ -14,29 +14,19 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   {
-  "folke/which-key.nvim",
-  event = "VeryLazy",
-  init = function()
-    vim.o.timeout = true
-    vim.o.timeoutlen = 300
-  end,
-  opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  }
-},
-  'preservim/nerdtree',
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    keys = {
-      { "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
-    },
-    config = function()
-      require("neo-tree").setup()
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
     end,
-    dependencies = { "neo-tree" }
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
   },
+  { "folke/neodev.nvim", opts = {} },
   {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.0',
@@ -55,7 +45,7 @@ require("lazy").setup({
   'mbbill/undotree',
   'tpope/vim-fugitive',
   { 'williamboman/mason.nvim' },
-  { 'dundalek/lazy-lsp.nvim', dependencies = { 'neovim/nvim-lspconfig' } },
+  { 'dundalek/lazy-lsp.nvim',          dependencies = { 'neovim/nvim-lspconfig' } },
   'nvim-lua/plenary.nvim',
   'tjdevries/express_line.nvim',
   {
@@ -70,15 +60,15 @@ require("lazy").setup({
   'lommix/godot.nvim',
   'mfussenegger/nvim-dap',
   -- lsp
-  -- 
+  --
   'simrat39/rust-tools.nvim',
-  {'williamboman/mason.nvim'},
-  {'williamboman/mason-lspconfig.nvim'},
-  {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
-  {'neovim/nvim-lspconfig'},
-  {'hrsh7th/cmp-nvim-lsp'},
-  {'hrsh7th/nvim-cmp'},
-  {'L3MON4D3/LuaSnip'},
+  { 'williamboman/mason.nvim' },
+  { 'williamboman/mason-lspconfig.nvim' },
+  { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
+  { 'neovim/nvim-lspconfig' },
+  { 'hrsh7th/cmp-nvim-lsp' },
+  { 'hrsh7th/nvim-cmp' },
+  { 'L3MON4D3/LuaSnip' },
   { 'hrsh7th/nvim-cmp' },
   {
     "NeogitOrg/neogit",
@@ -88,6 +78,55 @@ require("lazy").setup({
       "nvim-telescope/telescope.nvim", -- optional
     },
     config = true
+  },
+  {
+    'nvimdev/dashboard-nvim',
+    event = 'VimEnter',
+    config = function()
+      require('dashboard').setup {
+        -- config
+        theme = 'hyper',
+        config = {
+          week_header = {
+            enable = true,
+          },
+          shortcut = {
+            { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+            {
+              icon = ' ',
+              icon_hl = '@variable',
+              desc = 'Files',
+              group = 'Label',
+              action = 'Telescope find_files',
+              key = 'f',
+            },
+            {
+              desc = ' Apps',
+              group = 'DiagnosticHint',
+              action = 'Telescope app',
+              key = 'a',
+            },
+            {
+              desc = ' dotfiles',
+              group = 'Number',
+              action = 'Telescope dotfiles',
+              key = 'd',
+            },
+          },
+        },
+      }
+    end,
+    dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+      "3rd/image.nvim",              -- Optional image support in preview window: See `# Preview Mode` for more information
+    }
   }
 })
 
