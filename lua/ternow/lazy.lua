@@ -13,13 +13,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  -- development of config
   { "folke/neodev.nvim",               opts = {} },
-  {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.5',
-    -- or                              , branch = '0.1.x',
-    dependencies = { 'nvim-lua/plenary.nvim' }
-  },
+  -- colorscheme
   {
     'rose-pine/neovim',
     name = 'rose-pine',
@@ -28,67 +24,17 @@ require("lazy").setup({
       vim.cmd('colorscheme rose-pine')
     end
   },
-  { "nvim-treesitter/nvim-treesitter", },
-  'theprimeagen/harpoon',
-  'mbbill/undotree',
-  'sbdchd/neoformat',
-  'stevearc/dressing.nvim',
-  'simrat39/rust-tools.nvim',
-  { 'williamboman/mason.nvim' },
-  { 'williamboman/mason-lspconfig.nvim' },
-  { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
-  { 'neovim/nvim-lspconfig' },
-  { 'hrsh7th/cmp-nvim-lsp' },
-  { 'hrsh7th/nvim-cmp' },
-  { 'L3MON4D3/LuaSnip' },
+  -- git integration
   {
     "NeogitOrg/neogit",
     dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
-      "sindrets/diffview.nvim",        -- optional - Diff integration
-      "nvim-telescope/telescope.nvim", -- optional
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "nvim-telescope/telescope.nvim",
     },
     config = true
   },
-  {
-    'nvimdev/dashboard-nvim',
-    event = 'VimEnter',
-    config = function()
-      require('dashboard').setup {
-        -- config
-        theme = 'hyper',
-        config = {
-          week_header = {
-            enable = true,
-          },
-          shortcut = {
-            { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
-            {
-              icon = ' ',
-              icon_hl = '@variable',
-              desc = 'Files',
-              group = 'Label',
-              action = 'Telescope find_files',
-              key = 'f',
-            },
-            {
-              desc = ' Apps',
-              group = 'DiagnosticHint',
-              action = 'Telescope app',
-              key = 'a',
-            },
-            {
-              desc = ' dotfiles',
-              group = 'Number',
-              action = 'Telescope dotfiles',
-              key = 'd',
-            },
-          },
-        },
-      }
-    end,
-    dependencies = { { 'nvim-tree/nvim-web-devicons' } }
-  },
+  -- navigation and stuff
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
@@ -98,7 +44,30 @@ require("lazy").setup({
       "MunifTanjim/nui.nvim",
       "3rd/image.nvim",              -- Optional image support in preview window: See `# Preview Mode` for more information
     }
-  }
+  },
+  {
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.5',
+    -- or                              , branch = '0.1.x',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
+  { "nvim-treesitter/nvim-treesitter", },
+  'theprimeagen/harpoon',
+  'mbbill/undotree',
+  -- better DX
+  'stevearc/dressing.nvim',
+  {
+    "startup-nvim/startup.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+  },
+  -- lsp
+  'sbdchd/neoformat',
+  'simrat39/rust-tools.nvim',
+  { 'williamboman/mason.nvim' },
+  { 'williamboman/mason-lspconfig.nvim' },
+  { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
+  { 'neovim/nvim-lspconfig' },
+  { 'hrsh7th/cmp-nvim-lsp' },
+  { 'hrsh7th/nvim-cmp' },
+  { 'L3MON4D3/LuaSnip' },
 })
-
-require("mason").setup()
