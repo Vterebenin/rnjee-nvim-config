@@ -5,16 +5,21 @@ lsp.ensure_installed({
   'tsserver',
   'eslint',
   'rust_analyzer',
+  'lua-language-server',
 })
 
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 local cmp_mappings = lsp.defaults.cmp_mappings({
-  ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-  ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-  ['<cr>'] = cmp.mapping.confirm({ select = true }),
-  ["<C-Space>"] = cmp.mapping.complete(),
+})
+cmp.setup({
+  mapping = {
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+    ["<C-Space>"] = cmp.mapping.complete(),
+  }
 })
 
 -- disable completion with tab
@@ -54,31 +59,10 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 
--- LSP Config for Godot
-lspconfig = require'lspconfig'
-lspconfig.gdscript.setup{
-  filetypes = { "gd", "gdscript", "gdscript3" },
-}
+lsp.on_attach(function(client, bufnr)
+  lsp.default_keymaps({
+    buffer = bufnr,
+    preserve_mappings = false
+  })
+end)
 
-lspconfig.rust_analyzer.setup {
-  settings = {
-    ['rust-analyzer'] = {
-      checkOnSave = {
-        allFeatures = true,
-        overrideCommand = {
-          'cargo', 'clippy', '--workspace', '--message-format=json',
-          '--all-targets', '--all-features'
-        }
-      }
-    }
-  }
-}
-lspconfig.setup{
-  init_options = {
-    userLanguages = {
-      eelixir = "html-eex",
-      eruby = "erb",
-      rust = "html",
-    },
-  },
-}
