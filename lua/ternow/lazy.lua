@@ -16,14 +16,7 @@ require("lazy").setup({
   -- development of config
   { "folke/neodev.nvim",               opts = {} },
   -- colorscheme
-  {
-    'rose-pine/neovim',
-    name = 'rose-pine',
-    config = function()
-      require("rose-pine").setup()
-      vim.cmd('colorscheme rose-pine')
-    end
-  },
+  "rebelot/kanagawa.nvim",
   -- git integration
   {
     "NeogitOrg/neogit",
@@ -56,6 +49,10 @@ require("lazy").setup({
   'mbbill/undotree',
   -- better DX
   'stevearc/dressing.nvim',
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
+  },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
