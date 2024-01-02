@@ -1,10 +1,13 @@
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 
-vim.keymap.set("n", "<leader>a", mark.add_file)
-vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
-
-vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
-vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
-vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
-vim.keymap.set("n", "<C-s>", function() ui.nav_file(1) end)
+local wk = require("which-key")
+wk.register({
+  ["<leader>h"] = { name = "Harpoon" },
+  ["<leader>ha"] = { mark.add_file, "Add file" },
+  ["<leader>he"] = { ui.toggle_quick_menu, "Toggle Menu" },
+  ["<leader>h1"] = { function() ui.nav_file(1) end, "Navigate to 1" },
+  ["<leader>h2"] = { function() ui.nav_file(2) end, "Navigate to 2" },
+  ["<leader>h3"] = { function() ui.nav_file(3) end, "Navigate to 3" },
+  ["<leader>h4"] = { function() ui.nav_file(4) end, "Navigate to 4" },
+})

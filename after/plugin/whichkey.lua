@@ -1,0 +1,22 @@
+local wk = require("which-key")
+wk.register({
+  ["<leader>p"] = { name = "Project" },
+  ["<leader>pv"] = { ":Neotree<CR>", "Toggle Neotree" },
+  ["<leader>s"] = { name = "Search" },
+  ["<leader>sr"] = { [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Search and Replace" },
+  ["<leader>x"] = { "<cmd>!chmod +x %<CR>", "Make Executable", silent = true },
+  ["<leader>l"] = { name = "LSP" },
+  ["<leader>la"] = { ":lua runCodeAction()<CR>", "Code Action", noremap = true },
+  ["<leader>lf"] = { ":lua formatCode()<CR>", "Code Format", noremap = true },
+  ["<leader>ld"] = { ":lua vim.diagnostic.open_float(0, {scope='line'})<CR>", "Code Diagnostic", noremap = true },
+  ["<leader>u"] = { vim.cmd.UndotreeToggle, "Undotree" },
+})
+-- IGNORE
+wk.register({
+  ["<leader>j"] = "which_key_ignore",
+  ["<leader>d"] = "which_key_ignore",
+  ["<leader>Y"] = "which_key_ignore",
+  ["<leader>y"] = "which_key_ignore",
+  ["<leader>k"] = "which_key_ignore",
+})
+
