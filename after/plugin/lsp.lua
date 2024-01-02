@@ -1,17 +1,22 @@
-local lsp = require("lsp-zero")
+local lsp_zero = require('lsp-zero')
 
-lsp.preset("recommended")
-lsp.ensure_installed({
-  'tsserver',
-  'eslint',
-  'rust_analyzer',
-  'lua-language-server',
+lsp_zero.on_attach(function(client, bufnr)
+  -- see :help lsp-zero-keybindings
+  -- to learn the available actions
+  lsp_zero.default_keymaps({buffer = bufnr})
+end)
+
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  ensure_installed = {},
+  handlers = {
+    lsp_zero.default_setup,
+  },
 })
-
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
-local cmp_mappings = lsp.defaults.cmp_mappings({
+local cmp_mappings = lsp_zero.defaults.cmp_mappings({
 })
 cmp.setup({
   mapping = {
@@ -27,11 +32,11 @@ cmp.setup({
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
-lsp.setup_nvim_cmp({
+lsp_zero.setup_nvim_cmp({
   mapping = cmp_mappings
 })
 
-lsp.set_preferences({
+lsp_zero.set_preferences({
   suggest_lsp_servers = false,
   sign_icons = {
     error = 'E',
@@ -43,8 +48,8 @@ lsp.set_preferences({
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 
-lsp.nvim_workspace()
-lsp.setup()
+lsp_zero.nvim_workspace()
+lsp_zero.setup()
 
 vim.diagnostic.config({
   virtual_text = true,
@@ -59,8 +64,8 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 
-lsp.on_attach(function(client, bufnr)
-  lsp.default_keymaps({
+lsp_zero.on_attach(function(client, bufnr)
+  lsp_zero.default_keymaps({
     buffer = bufnr,
     preserve_mappings = false
   })
