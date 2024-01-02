@@ -13,24 +13,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-    end,
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    }
-  },
-  { "folke/neodev.nvim", opts = {} },
+  { "folke/neodev.nvim",               opts = {} },
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.0',
-    dependencies = { { 'nvim-lua/plenary.nvim' } }
+    tag = '0.1.5',
+    -- or                              , branch = '0.1.x',
+    dependencies = { 'nvim-lua/plenary.nvim' }
   },
   {
     'rose-pine/neovim',
@@ -43,24 +31,8 @@ require("lazy").setup({
   { "nvim-treesitter/nvim-treesitter", },
   'theprimeagen/harpoon',
   'mbbill/undotree',
-  'tpope/vim-fugitive',
-  { 'williamboman/mason.nvim' },
-  { 'dundalek/lazy-lsp.nvim',          dependencies = { 'neovim/nvim-lspconfig' } },
-  'nvim-lua/plenary.nvim',
-  'tjdevries/express_line.nvim',
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    config = function()
-      require("null-ls").setup()
-    end,
-    dependencies = { "nvim-lua/plenary.nvim" },
-  },
   'sbdchd/neoformat',
   'stevearc/dressing.nvim',
-  'lommix/godot.nvim',
-  'mfussenegger/nvim-dap',
-  -- lsp
-  --
   'simrat39/rust-tools.nvim',
   { 'williamboman/mason.nvim' },
   { 'williamboman/mason-lspconfig.nvim' },
@@ -69,7 +41,6 @@ require("lazy").setup({
   { 'hrsh7th/cmp-nvim-lsp' },
   { 'hrsh7th/nvim-cmp' },
   { 'L3MON4D3/LuaSnip' },
-  { 'hrsh7th/nvim-cmp' },
   {
     "NeogitOrg/neogit",
     dependencies = {
