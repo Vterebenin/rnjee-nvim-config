@@ -14,7 +14,7 @@ Before getting started, make sure you have the following prerequisites installed
 1. Clone this repository to your local machine:
 
     ```bash
-    git clone https://github.com/Vterebenin/new-neovim-configs ~/.config/nvim
+    git clone https://github.com/Vterebenin/rnjee-nvim-config ~/.config/nvim
     ```
 
 2. Open Neovim and run the following command to install plugins using `lazy`:
