@@ -34,12 +34,35 @@ Before getting started, make sure you have the following prerequisites installed
 
 I use the [lazy](https://github.com/folke/lazy.nvim) plugin manager.
 
-**List of current plugins(wip):**
+**List of current plugins(todo: add links):**
 
 - **Plugins Included:**
-  - Plugin 1
-  - Plugin 2
-  - ...
+  - lazy.nvim - the manager itself
+  - LuaSnip - lua snippets and stuff
+  - lualine.nvim - another lua shit
+  - diffview.nvim - git diff view
+  - dressing.nvim - better modals
+  - gitsigns.nvim - git inline help for hunk actions
+  - neogit - git integration
+  - harpoon - feels like i was selled out by this, not really using it
+  - image.nvim - images preview
+  - kanagawa.nvim - my theme
+  - lsp-zero.nvim - this guy have a fancy chair in my plugins room
+  - mason.nvim - this is the servent of the guy above
+  - nvim-lspconfig - this is the maid of the plugins above
+  - neo-tree.nvim - my tree, but i wasn't a planter 
+  - neodev.nvim - this thing helps developing config
+  - neoformat - formatter, probably?
+  - nui.nvim - idk
+  - nvim-cmp - autocompletes
+  - nvim-treesitter - my man
+  - nvim-web-devicons - icons and shit
+  - rust-tools.nvim - uhum, rust, yep
+  - startup.nvim - my fancy startup page
+  - telescope.nvim - this thing look things up
+  - undotree - never really using it, but might come handy one day
+  - which-key.nvim - keymaps documentations
+}
 
 ## Customization
 
