@@ -9,6 +9,11 @@ Before getting started, make sure you have the following prerequisites installed
 - Neovim (v0.5.0+ recommended)
 - Git
 
+## Photos
+
+<img width="530" alt="image" src="https://github.com/Vterebenin/rnjee-nvim-config/assets/38083529/b08bb532-6ddb-40b2-b7c3-f7d9c29f3ab6">
+<img width="953" alt="image" src="https://github.com/Vterebenin/rnjee-nvim-config/assets/38083529/42853008-b123-4320-8cd9-c274a95baabb">
+
 ## Installation
 
 1. Clone this repository to your local machine:
