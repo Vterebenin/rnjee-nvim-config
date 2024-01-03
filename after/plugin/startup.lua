@@ -1,6 +1,6 @@
 local startup = require("startup")
 startup.setup {
-  theme = "custom_theme",
+  theme = "rnjee",
   content = {
     [" Find File"] = { "Telescope find_files", "<leader>ff" },
     [" Find Word"] = { "Telescope live_grep", "<leader>lg" },
@@ -11,5 +11,3 @@ startup.setup {
   }
 }
 
-
-require("startup").setup({theme = "evil"})

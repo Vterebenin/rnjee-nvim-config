@@ -1,7 +1,8 @@
 local wk = require("which-key")
 wk.register({
   ["<leader>p"] = { name = "Project" },
-  ["<leader>pv"] = { ":Neotree<CR>", "Toggle Neotree" },
+  ["<leader>pv"] = { ":Neotree<CR>", "Project tree" },
+  ["<leader>pr"] = { ":Neotree reveal_file=%:p<CR>", "Project file" },
   ["<leader>s"] = { name = "Search" },
   ["<leader>sr"] = { [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Search and Replace" },
   ["<leader>x"] = { "<cmd>!chmod +x %<CR>", "Make Executable", silent = true },
