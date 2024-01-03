@@ -32,7 +32,7 @@ Before getting started, make sure you have the following prerequisites installed
 
 ## Plugins
 
-I use the [lazy](https://github.com/dinhhuy258/lazy) plugin manager.
+I use the [lazy](https://github.com/folke/lazy.nvim) plugin manager.
 
 **List of current plugins(wip):**
 
