@@ -15,7 +15,6 @@ local header = {
   [[ ⡝⡵⡕⡀⠑⠳⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⢉⡠⡲⡫⡪⡪⡣ ]],
 }
 local settings = {
-  -- every line should be same width without escaped \
   options = {
     mapping_keys = true,
     cursor_column = 0.5,
@@ -46,7 +45,6 @@ local settings = {
     default_color = "",
     oldfiles_amount = 0,
   },
-  -- name which will be displayed and command
   body = {
     type = "mapping",
     align = "center",
