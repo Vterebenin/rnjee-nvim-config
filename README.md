@@ -67,7 +67,6 @@ I use the [lazy](https://github.com/folke/lazy.nvim) plugin manager.
   - telescope.nvim - this thing look things up
   - undotree - never really using it, but might come handy one day
   - which-key.nvim - keymaps documentations
-}
 
 ## Customization
 
