@@ -10,8 +10,12 @@ wk.register({
   ["<leader>la"] = { ":lua runCodeAction()<CR>", "Code Action", noremap = true },
   ["<leader>lf"] = { ":lua formatCode()<CR>", "Code Format", noremap = true },
   ["<leader>ld"] = { ":lua vim.diagnostic.open_float(0, {scope='line'})<CR>", "Code Diagnostic", noremap = true },
-  ["<leader>u"] = { vim.cmd.UndotreeToggle, "Undotree" },
+  ["<leader>u"] = { name = "Utils" },
+  ["<leader>uu"] = { vim.cmd.UndotreeToggle, "Undotree" },
+  ["<leader>ur"] = { [[:%s#\v(\d+)px#\=printf("%0.3fem", 1.0/16*submatch(1))#gc]], "PxToRem" },
 })
+
+
 -- IGNORE
 wk.register({
   ["<leader>j"] = "which_key_ignore",
