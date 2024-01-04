@@ -12,7 +12,7 @@ wk.register({
   ["<leader>ld"] = { ":lua vim.diagnostic.open_float(0, {scope='line'})<CR>", "Code Diagnostic", noremap = true },
   ["<leader>u"] = { name = "Utils" },
   ["<leader>uu"] = { vim.cmd.UndotreeToggle, "Undotree" },
-  ["<leader>ur"] = { [[:%s#\v(\d+)px#\=printf("%0.3fem", 1.0/16*submatch(1))#gc]], "PxToRem" },
+  ["<leader>ur"] = { [[:%s#\v(\d+)px#\=printf("%0.3frem", 1.0/16*submatch(1))#gc]], "PxToRem" },
 })
 
 
