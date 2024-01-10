@@ -43,3 +43,6 @@ lsp_zero.on_attach(function(client, bufnr)
   })
 end)
 
+require'lspconfig'.volar.setup{
+  filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'}
+}
