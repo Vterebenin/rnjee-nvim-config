@@ -9,8 +9,8 @@ wk.register({
   ["<leader>fb"] = { builtin.buffers, "Find Buffer" },
   ["<leader>pr"] = { ":Neotree reveal_file=%:p<CR>", "Reveal File" },
   ["<leader>fg"] = { builtin.live_grep, "Find Grep" },
+  ["<leader>fh"] = { builtin.resume, "Find Resume" },
   ["<leader>fr"] = { vim.lsp.buf.format, "Format File" },
-  ["<leader>fh"] = { builtin.search_history, "Find History" },
   ["<leader>ls"] = { builtin.spell_suggest, "Spelling" },
 })
 
