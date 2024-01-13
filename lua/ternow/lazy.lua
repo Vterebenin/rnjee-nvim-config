@@ -97,7 +97,6 @@ require("lazy").setup({
   },
   -- lsp
   'sbdchd/neoformat',
-  'simrat39/rust-tools.nvim',
   { 'williamboman/mason.nvim' },
   { 'williamboman/mason-lspconfig.nvim' },
   { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
@@ -119,5 +118,12 @@ require("lazy").setup({
       --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     }
-  }
+  },
+  -- debug
+  { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
+  'simrat39/rust-tools.nvim',
+
+  -- Debugging
+  'nvim-lua/plenary.nvim',
+  'mfussenegger/nvim-dap',
 })
