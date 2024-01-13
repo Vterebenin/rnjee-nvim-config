@@ -12,8 +12,12 @@ dap.listeners.before.event_exited["dapui_config"] = function()
   dapui.close()
 end
 
--- todo: whichkey man
-vim.keymap.set('n', '<leader>dt', ':DapToggleBreakpoint<CR>')
-vim.keymap.set('n', '<leader>dx', ':DapTerminate<CR>')
-vim.keymap.set('n', '<leader>do', ':DapStepOver<CR>')
+local wk = require("which-key")
+wk.register({
+  ["<leader>d"] = { name = "Debug" },
+  ["<leader>dt"] = { ":DapToggleBreakpoint<CR>", "Toggle breakpoint" },
+  ["<leader>dx"] = { ":DapTerminate<CR>", "Toggle Terminate" },
+  ["<leader>do"] = { ":DapStepOver<CR>", "Step Over" },
+  ["<leader>du"] = { ":DapStepOut<CR>", "Step Out" },
+})
 

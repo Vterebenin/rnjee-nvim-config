@@ -19,7 +19,6 @@ wk.register({
 -- IGNORE
 wk.register({
   ["<leader>j"] = "which_key_ignore",
-  ["<leader>d"] = "which_key_ignore",
   ["<leader>Y"] = "which_key_ignore",
   ["<leader>y"] = "which_key_ignore",
   ["<leader>k"] = "which_key_ignore",
