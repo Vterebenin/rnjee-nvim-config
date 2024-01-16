@@ -4,6 +4,7 @@ local wk = require("which-key")
 wk.register({
   ["<leader>f"] = { name = "Files" },
   ["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find File" },
+  ["<leader>cs"] = { "<cmd>Telescope colorscheme<cr>", "Change colorscheme" },
   ["<leader>fo"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
   ["<leader>fn"] = { "<cmd>enew<cr>", "New File" },
   ["<leader>fb"] = { builtin.buffers, "Find Buffer" },
