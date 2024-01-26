@@ -14,9 +14,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   -- development of config
-  { "folke/neodev.nvim",               opts = {} },
+  { "folke/neodev.nvim", opts = {} },
   -- colorscheme
   "rebelot/kanagawa.nvim",
+  { "catppuccin/nvim",   name = "catppuccin" },
   -- git integration
   {
     "lewis6991/gitsigns.nvim",
