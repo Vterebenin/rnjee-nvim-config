@@ -137,17 +137,22 @@ require("lazy").setup({
   'mfussenegger/nvim-dap',
 
   -- tests and shit
-  { "rouge8/neotest-rust" },
   {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-neotest/nvim-nio",
       "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
-      "nvim-treesitter/nvim-treesitter"
+      "nvim-treesitter/nvim-treesitter",
+      "marilari88/neotest-vitest",
+      "rouge8/neotest-rust",
     },
     adapters = {
       "neotest-rust"
     }
   },
+  {
+    "andythigpen/nvim-coverage",
+    dependencies = "nvim-lua/plenary.nvim",
+  }
 })

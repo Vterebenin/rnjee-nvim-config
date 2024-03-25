@@ -1,4 +1,6 @@
-require'lspconfig'.volar.setup{}
+require 'lspconfig'.volar.setup {
+  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
+}
 local lsp_zero = require('lsp-zero')
 
 lsp_zero.on_attach(function(client, bufnr)
@@ -43,4 +45,3 @@ lsp_zero.on_attach(function(client, bufnr)
     preserve_mappings = false
   })
 end)
-

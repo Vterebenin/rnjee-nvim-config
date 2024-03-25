@@ -2,11 +2,13 @@ local wk = require("which-key")
 
 require("neotest").setup({
   adapters = {
+    require("neotest-vitest"),
     require("neotest-rust") {
         args = { "--no-capture" },
     }
   }
 })
+
 wk.register({
   ["<leader>t"] = { name = "Tests" },
   ["<leader>tt"] = { function() require("neotest").run.run() end, "Test nearest" },
