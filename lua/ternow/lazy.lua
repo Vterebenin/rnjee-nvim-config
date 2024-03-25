@@ -129,7 +129,7 @@ require("lazy").setup({
     }
   },
   -- debug
-  { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
+  { "rcarriga/nvim-dap-ui",     dependencies = { "mfussenegger/nvim-dap" } },
   'simrat39/rust-tools.nvim',
 
   -- Debugging
@@ -154,5 +154,6 @@ require("lazy").setup({
   {
     "andythigpen/nvim-coverage",
     dependencies = "nvim-lua/plenary.nvim",
-  }
+  },
+  { "ellisonleao/gruvbox.nvim", priority = 1000, config = true }
 })
