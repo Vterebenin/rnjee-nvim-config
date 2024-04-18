@@ -3,12 +3,6 @@ require 'lspconfig'.volar.setup {
 }
 local lsp_zero = require('lsp-zero')
 
-lsp_zero.on_attach(function(client, bufnr)
-  -- see :help lsp-zero-keybindings
-  -- to learn the available actions
-  lsp_zero.default_keymaps({ buffer = bufnr })
-end)
-
 require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = {},
@@ -39,9 +33,14 @@ vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 
 lsp_zero.setup()
 
+local wk = require("which-key")
+
 lsp_zero.on_attach(function(client, bufnr)
   lsp_zero.default_keymaps({
     buffer = bufnr,
     preserve_mappings = false
+  })
+  wk.register({
+    ["gR"] = { ":Telescope lsp_references<CR>", "References Search" }
   })
 end)

@@ -155,5 +155,5 @@ require("lazy").setup({
     "andythigpen/nvim-coverage",
     dependencies = "nvim-lua/plenary.nvim",
   },
-  { "ellisonleao/gruvbox.nvim", priority = 1000, config = true }
+  { "ellisonleao/gruvbox.nvim" }
 })

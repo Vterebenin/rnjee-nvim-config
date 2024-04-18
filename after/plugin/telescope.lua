@@ -12,6 +12,7 @@ wk.register({
   ["<leader>fg"] = { builtin.live_grep, "Find Grep" },
   ["<leader>fh"] = { builtin.resume, "Find Resume" },
   ["<leader>fr"] = { vim.lsp.buf.format, "Format File" },
+  ["<leader>fe"] = { ":EslintFixAll<cr>", "Format File (Eslint)" },
   ["<leader>ls"] = { builtin.spell_suggest, "Spelling" },
 })
 
