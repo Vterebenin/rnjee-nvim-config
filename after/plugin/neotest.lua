@@ -3,9 +3,7 @@ local wk = require("which-key")
 require("neotest").setup({
   adapters = {
     require("neotest-vitest"),
-    require("neotest-rust") {
-        args = { "--no-capture" },
-    }
+    require('rustaceanvim.neotest'),
   }
 })
 

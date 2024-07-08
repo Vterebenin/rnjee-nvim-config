@@ -149,7 +149,12 @@ require("lazy").setup({
   },
   -- debug
   { "rcarriga/nvim-dap-ui",    dependencies = { "mfussenegger/nvim-dap" } },
-  'simrat39/rust-tools.nvim',
+  -- 'simrat39/rust-tools.nvim',
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^4', -- Recommended
+    ft = { 'rust' },
+  },
 
   -- Debugging
   'nvim-lua/plenary.nvim',
@@ -174,5 +179,13 @@ require("lazy").setup({
     "andythigpen/nvim-coverage",
     dependencies = "nvim-lua/plenary.nvim",
   },
-  { "ellisonleao/gruvbox.nvim" },
+  {
+    "nvim-pack/nvim-spectre",
+    keys = {
+      { '<F4>', "<cmd>SpectreWithCWD<cr>", mode = { 'n' } },
+    },
+    config = function()
+      require('spectre').setup({ is_block_ui_break = true })
+    end,
+  }
 })

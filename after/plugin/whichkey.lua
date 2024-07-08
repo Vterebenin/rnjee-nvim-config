@@ -5,6 +5,9 @@ wk.register({
   ["<leader>pr"] = { ":Neotree reveal_file=%:p<CR>", "Project file" },
   ["<leader>s"] = { name = "Search" },
   ["<leader>sr"] = { [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Search and Replace" },
+  ["<leader>S"] = { '<cmd>lua require("spectre").toggle()<CR>', "Toggle Spectre" },
+  ["<leader>sw"] = { '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', "Search Current word" },
+  ['<leader>sp'] = { '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', "Search on current file" },
   ["<leader>x"] = { "<cmd>!chmod +x %<CR>", "Make Executable", silent = true },
   ["<leader>l"] = { name = "LSP" },
   ["<leader>la"] = { ":lua runCodeAction()<CR>", "Code Action", noremap = true },
@@ -23,4 +26,3 @@ wk.register({
   ["<leader>y"] = "which_key_ignore",
   ["<leader>k"] = "which_key_ignore",
 })
-
