@@ -14,18 +14,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   -- development of config
-  { "folke/neodev.nvim", opts = {} },
+  { "folke/neodev.nvim",          opts = {} },
   -- colorscheme
-  "rebelot/kanagawa.nvim",
-  { "catppuccin/nvim",   name = "catppuccin" },
-  {
-    'AlexvZyl/nordic.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require 'nordic'.load()
-    end
-  },
+  { "catppuccin/nvim",            name = "catppuccin" },
+  { "rose-pine/neovim",           name = "rose-pine" },
   -- git integration
   {
     "lewis6991/gitsigns.nvim",
@@ -51,15 +43,14 @@ require("lazy").setup({
       })
     end,
   },
-
   {
     "NeogitOrg/neogit",
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
-      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",         -- required
+      "sindrets/diffview.nvim",        -- optional - Diff integration
+      "nvim-telescope/telescope.nvim", -- optional
     },
-    config = true
+    opts = {}
   },
   -- navigation and stuff
   {
@@ -104,6 +95,34 @@ require("lazy").setup({
     "startup-nvim/startup.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
   },
+  {
+    'romgrk/barbar.nvim',
+    dependencies = {
+      'lewis6991/gitsigns.nvim',     -- OPTIONAL: for git status
+      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+    },
+    init = function() vim.g.barbar_auto_setup = false end,
+    opts = {
+      -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+      insert_at_start = true,
+      --   -- Set the filetypes which barbar will offset itself for
+      sidebar_filetypes = {
+        -- Use the default values: {event = 'BufWinLeave', text = '', align = 'left'}
+        NvimTree = true,
+        -- Or, specify the text used for the offset:
+        undotree = {
+          text = 'undotree',
+          align = 'center', -- *optionally* specify an alignment (either 'left', 'center', or 'right')
+        },
+        -- Or, specify the event which the sidebar executes when leaving:
+        ['neo-tree'] = { event = 'BufWipeout' },
+        -- Or, specify all three
+        -- Outline = { event = 'BufWinLeave', text = 'symbols-outline', align = 'right' },
+      },
+
+    },
+    version = '^1.0.0', -- optional: only update when a new 1.x version is released
+  },
   -- lsp
   'sbdchd/neoformat',
   { 'williamboman/mason.nvim' },
@@ -129,7 +148,7 @@ require("lazy").setup({
     }
   },
   -- debug
-  { "rcarriga/nvim-dap-ui",     dependencies = { "mfussenegger/nvim-dap" } },
+  { "rcarriga/nvim-dap-ui",    dependencies = { "mfussenegger/nvim-dap" } },
   'simrat39/rust-tools.nvim',
 
   -- Debugging
@@ -155,5 +174,5 @@ require("lazy").setup({
     "andythigpen/nvim-coverage",
     dependencies = "nvim-lua/plenary.nvim",
   },
-  { "ellisonleao/gruvbox.nvim" }
+  { "ellisonleao/gruvbox.nvim" },
 })
