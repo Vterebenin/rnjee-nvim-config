@@ -13,11 +13,11 @@ dap.listeners.before.event_exited["dapui_config"] = function()
 end
 
 local wk = require("which-key")
-wk.register({
-  ["<leader>d"] = { name = "Debug" },
-  ["<leader>dt"] = { ":DapToggleBreakpoint<CR>", "Toggle breakpoint" },
-  ["<leader>dx"] = { ":DapTerminate<CR>", "Toggle Terminate" },
-  ["<leader>do"] = { ":DapStepOver<CR>", "Step Over" },
-  ["<leader>du"] = { ":DapStepOut<CR>", "Step Out" },
+wk.add({
+  { "<leader>d", group = "Debug" },
+  { "<leader>dt", ":DapToggleBreakpoint<CR>", desc = "Toggle breakpoint" },
+  { "<leader>dx", ":DapTerminate<CR>", desc = "Toggle Terminate" },
+  { "<leader>do", ":DapStepOver<CR>", desc = "Step Over" },
+  { "<leader>du", ":DapStepOut<CR>", desc = "Step Out" },
 })
 

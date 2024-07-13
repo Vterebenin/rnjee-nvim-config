@@ -14,10 +14,38 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   -- development of config
-  { "folke/neodev.nvim",          opts = {} },
+  { "folke/neodev.nvim", opts = {} },
   -- colorscheme
-  { "catppuccin/nvim",            name = "catppuccin" },
-  { "rose-pine/neovim",           name = "rose-pine" },
+  { "catppuccin/nvim",   name = "catppuccin" },
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("rose-pine").setup({
+        highlight_groups = {
+          TelescopeResultsTitle = { fg = "surface", bg = "surface" },
+          TelescopeBorder = { fg = "surface", bg = "surface" },
+          TelescopeSelection = { fg = "text", bg = "overlay", bold = true },
+          TelescopeSelectionCaret = { fg = "text", bg = "highlight_med" },
+          TelescopeMultiSelection = { fg = "text", bg = "highlight_high" },
+
+          TelescopeTitle = { fg = "base", bg = "love" },
+          TelescopePromptTitle = { fg = "base", bg = "love" },
+          TelescopePreviewTitle = { fg = "base", bg = "foam" },
+
+          TelescopePromptNormal = { bg = "overlay" },
+          TelescopePromptBorder = { fg = "overlay", bg = "overlay" },
+          TelescopePromptPrefix = { fg = "love", bg = "overlay" },
+          NvimTreeCursorLine = { bg = "surface" },
+          NvimTreeNormal = { bg = "#161420" },
+          NvimTreeWinSeparator = { bg = "#161420", fg = "#161420" },
+          CmpWinBorder = { fg = "overlay", bg = "base" },
+        },
+      })
+    end,
+  },
   -- git integration
   {
     "lewis6991/gitsigns.nvim",
@@ -119,7 +147,11 @@ require("lazy").setup({
         -- Or, specify all three
         -- Outline = { event = 'BufWinLeave', text = 'symbols-outline', align = 'right' },
       },
-
+      icons = {
+        separator = { left = '', right = '' },
+        -- If true, add an additional separator at the end of the buffer list
+        separator_at_end = false,
+      },
     },
     version = '^1.0.0', -- optional: only update when a new 1.x version is released
   },
@@ -148,7 +180,7 @@ require("lazy").setup({
     }
   },
   -- debug
-  { "rcarriga/nvim-dap-ui",    dependencies = { "mfussenegger/nvim-dap" } },
+  { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
   -- 'simrat39/rust-tools.nvim',
   {
     'mrcjkb/rustaceanvim',

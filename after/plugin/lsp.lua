@@ -57,7 +57,7 @@ lsp_zero.on_attach(function(client, bufnr)
     buffer = bufnr,
     preserve_mappings = false
   })
-  wk.register({
-    ["gR"] = { ":Telescope lsp_references<CR>", "References Search" }
+  wk.add({
+    { "gR", ":Telescope lsp_references<CR>", desc = "References Search" }
   })
 end)

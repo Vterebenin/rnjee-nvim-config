@@ -23,18 +23,18 @@ require('gitsigns').setup {
     end, { expr = true })
 
     -- Actions
-    wk.register({
-      ["<leader>gs"] = { gs.stage_hunk, "Stage Hunk" },
-      ["<leader>gu"] = { gs.undo_stage_hunk, "Undo Stage Hunk" },
-      ["<leader>gr"] = { gs.reset_hunk, "Reset Hunk" },
-      ["<leader>gR"] = { gs.reset_buffer, "Reset Buffer" },
-      ["<leader>gp"] = { gs.preview_hunk, "Preview Hunk" },
-      ["<leader>gb"] = { function() gs.blame_line { full = true } end, "Blame Line" },
-      ["<leader>gt"] = { gs.toggle_current_line_blame, "Toggle Blame Line" },
-      ["<leader>gS"] = { gs.stage_buffer, "Stage Buffer" },
-      ["<leader>gD"] = { gs.diffthis, "Diff this" },
-      ["<leader>gd"] = { function() gs.diffthis('~') end, "Diff this ~" },
-      ["<leader>gx"] = { gs.toggle_deleted, "Toggle deleted" },
+    wk.add({
+      { "<leader>gs",  gs.stage_hunk, desc = "Stage Hunk" },
+      { "<leader>gu",  gs.undo_stage_hunk, desc = "Undo Stage Hunk" },
+      { "<leader>gr",  gs.reset_hunk, desc = "Reset Hunk" },
+      { "<leader>gR",  gs.reset_buffer, desc = "Reset Buffer" },
+      { "<leader>gp",  gs.preview_hunk, desc = "Preview Hunk" },
+      { "<leader>gb",  function() gs.blame_line { full = true } end, desc = "Blame Line" },
+      { "<leader>gt",  gs.toggle_current_line_blame, desc = "Toggle Blame Line" },
+      { "<leader>gS",  gs.stage_buffer, desc = "Stage Buffer" },
+      { "<leader>gD",  gs.diffthis, desc = "Diff this" },
+      { "<leader>gd",  function() gs.diffthis('~') end, desc = "Diff this ~" },
+      { "<leader>gx",  gs.toggle_deleted, desc = "Toggle deleted" },
     })
 
     -- Text object
