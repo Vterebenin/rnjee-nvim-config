@@ -12,13 +12,13 @@
   "image.nvim": { "branch": "master", "commit": "61c76515cfc3cdac8123ece9e9761b20c3dc1315" },
   "lazy.nvim": { "branch": "main", "commit": "b02c9eae6a250f98908c146d1dc1a891f5019f0a" },
   "lsp-zero.nvim": { "branch": "v3.x", "commit": "87701af045b3032515776abeb47eb8c2ddb5e679" },
-  "lualine.nvim": { "branch": "master", "commit": "6a40b530539d2209f7dc0492f3681c8c126647ad" },
+  "lualine.nvim": { "branch": "master", "commit": "544dd1583f9bb27b393f598475c89809c4d5e86b" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "37a336b653f8594df75c827ed589f1c91d91ff6c" },
   "mason.nvim": { "branch": "main", "commit": "f96a31855fa8aea55599cea412fe611b85a874ed" },
   "neo-tree.nvim": { "branch": "v3.x", "commit": "29f7c215332ba95e470811c380ddbce2cebe2af4" },
   "neodev.nvim": { "branch": "main", "commit": "46aa467dca16cf3dfe27098042402066d2ae242d" },
   "neoformat": { "branch": "master", "commit": "82864d6c7926c4f3b535a2fd7eab919b116fc969" },
-  "neogit": { "branch": "master", "commit": "a20031fb5d7d12148764764059243135085e5c9b" },
+  "neogit": { "branch": "master", "commit": "e33089bb430201a16e5d64e8adc37b99c37e1469" },
   "neotest": { "branch": "master", "commit": "32ff2ac21135a372a42b38ae131e531e64833bd3" },
   "neotest-rust": { "branch": "main", "commit": "0418811e1e3499b2501593f2e131d02f5e6823d4" },
   "neotest-vitest": { "branch": "main", "commit": "353364aa05b94b09409cbef21b79c97c5564e2ce" },
@@ -40,5 +40,5 @@
   "startup.nvim": { "branch": "master", "commit": "c6ba324f9eba0c23b675b53af431346aab893268" },
   "telescope.nvim": { "branch": "master", "commit": "d90956833d7c27e73c621a61f20b29fdb7122709" },
   "undotree": { "branch": "master", "commit": "56c684a805fe948936cda0d1b19505b84ad7e065" },
-  "which-key.nvim": { "branch": "main", "commit": "d36f722f114dfdafc8098496e9b5dcbd9f8fc3e8" }
+  "which-key.nvim": { "branch": "main", "commit": "9225879c8e6ac254087fd749b1dfcfb2f4227fbb" }
 }
