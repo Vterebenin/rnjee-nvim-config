@@ -17,6 +17,7 @@ require("lazy").setup({
   { "folke/neodev.nvim", opts = {} },
   -- colorscheme
   { "catppuccin/nvim",   name = "catppuccin" },
+  -- lazy.nvim
   {
     "rose-pine/neovim",
     name = "rose-pine",
@@ -74,12 +75,12 @@ require("lazy").setup({
   {
     "NeogitOrg/neogit",
     dependencies = {
-      "nvim-lua/plenary.nvim", -- required
+      "nvim-lua/plenary.nvim",  -- required
       "sindrets/diffview.nvim", -- optional - Diff integration
 
       -- Only one of these is needed, not both.
       "nvim-telescope/telescope.nvim", -- optional
-      "ibhagwan/fzf-lua",            -- optional
+      "ibhagwan/fzf-lua",              -- optional
     },
     opts = {}
   },
@@ -104,6 +105,7 @@ require("lazy").setup({
   'theprimeagen/harpoon',
   'mbbill/undotree',
   -- better DX
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   'stevearc/dressing.nvim',
   {
     'nvim-lualine/lualine.nvim',
