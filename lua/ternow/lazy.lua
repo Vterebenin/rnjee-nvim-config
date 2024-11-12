@@ -47,6 +47,13 @@ require("lazy").setup({
       })
     end,
   },
+  {
+      'windwp/nvim-autopairs',
+      event = "InsertEnter",
+      config = true
+      -- use opts = {} for passing setup options
+      -- this is equivalent to setup({}) function
+  },
   -- git integration
   {
     "lewis6991/gitsigns.nvim",
@@ -105,6 +112,7 @@ require("lazy").setup({
   'theprimeagen/harpoon',
   'mbbill/undotree',
   -- better DX
+  { "xiyaowong/transparent.nvim" },
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   'stevearc/dressing.nvim',
   {
@@ -184,6 +192,7 @@ require("lazy").setup({
       "rcarriga/nvim-notify",
     }
   },
+  'brenoprata10/nvim-highlight-colors',
   -- debug
   { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
   -- 'simrat39/rust-tools.nvim',
