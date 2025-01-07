@@ -51,15 +51,15 @@ require("lazy").setup({
       { "<leader>n",  function() Snacks.notifier.show_history() end,   desc = "Notification History" },
       { "<leader>bd", function() Snacks.bufdelete() end,               desc = "Delete Buffer" },
       { "<leader>cR", function() Snacks.rename.rename_file() end,      desc = "Rename File" },
-      { "<leader>gB", function() Snacks.gitbrowse() end,               desc = "Git Browse",                  mode = { "n", "v" } },
+      { "<leader>gB", function() Snacks.gitbrowse() end,               desc = "Git Browse",               mode = { "n", "v" } },
       { "<leader>gb", function() Snacks.git.blame_line() end,          desc = "Git Blame Line" },
       { "<leader>gg", function() Snacks.lazygit() end,                 desc = "Lazygit" },
       { "<leader>gl", function() Snacks.lazygit.log() end,             desc = "Lazygit Log (cwd)" },
       { "<leader>un", function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" },
       { "<c-/>",      function() Snacks.terminal() end,                desc = "Toggle Terminal" },
       { "<c-_>",      function() Snacks.terminal() end,                desc = "which_key_ignore" },
-      { "]]",         function() Snacks.words.jump(vim.v.count1) end,  desc = "Next Reference",              mode = { "n", "t" } },
-      { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference",              mode = { "n", "t" } },
+      { "]]",         function() Snacks.words.jump(vim.v.count1) end,  desc = "Next Reference",           mode = { "n", "t" } },
+      { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference",           mode = { "n", "t" } },
       {
         "<leader>N",
         desc = "Neovim News",
@@ -99,13 +99,25 @@ require("lazy").setup({
           Snacks.toggle.diagnostics():map("<leader>ud")
           Snacks.toggle.line_number():map("<leader>ul")
           Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map(
-          "<leader>uc")
+            "<leader>uc")
           Snacks.toggle.treesitter():map("<leader>uT")
           Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
           Snacks.toggle.inlay_hints():map("<leader>uh")
           Snacks.toggle.indent():map("<leader>ug")
           Snacks.toggle.dim():map("<leader>uD")
         end,
+      })
+    end,
+  },
+  {
+    "neanias/everforest-nvim",
+    version = false,
+    lazy = false,
+    priority = 1000, -- make sure to load this before all the other start plugins
+    -- Optional; default configuration will be used if setup isn't called.
+    config = function()
+      require("everforest").setup({
+        -- Your config here
       })
     end,
   },
@@ -274,10 +286,9 @@ require("lazy").setup({
   -- 'simrat39/rust-tools.nvim',
   {
     'mrcjkb/rustaceanvim',
-    version = '^4', -- Recommended
-    ft = { 'rust' },
+    version = '^5', -- Recommended
+    lazy = false,   -- This plugin is already lazy
   },
-
   -- Debugging
   'nvim-lua/plenary.nvim',
   'mfussenegger/nvim-dap',
