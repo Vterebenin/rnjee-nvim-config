@@ -19,6 +19,26 @@ require("lazy").setup({
   { "catppuccin/nvim",   name = "catppuccin" },
   -- lazy.nvim
   {
+    "xero/evangelion.nvim",
+    lazy = false,
+    priority = 1000,
+    init = function()
+      vim.cmd.colorscheme("evangelion")
+    end,
+  },
+  {
+    "neanias/everforest-nvim",
+    version = false,
+    lazy = false,
+    priority = 1000, -- make sure to load this before all the other start plugins
+    -- Optional; default configuration will be used if setup isn't called.
+    config = function()
+      require("everforest").setup({
+        -- Your config here
+      })
+    end,
+  },
+  {
     "rose-pine/neovim",
     name = "rose-pine",
     lazy = false,
@@ -48,11 +68,11 @@ require("lazy").setup({
     end,
   },
   {
-      'windwp/nvim-autopairs',
-      event = "InsertEnter",
-      config = true
-      -- use opts = {} for passing setup options
-      -- this is equivalent to setup({}) function
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    config = true
+    -- use opts = {} for passing setup options
+    -- this is equivalent to setup({}) function
   },
   -- git integration
   {
@@ -198,8 +218,8 @@ require("lazy").setup({
   -- 'simrat39/rust-tools.nvim',
   {
     'mrcjkb/rustaceanvim',
-    version = '^4', -- Recommended
-    ft = { 'rust' },
+    version = '^5', -- Recommended
+    lazy = false,   -- This plugin is already lazy
   },
 
   -- Debugging
