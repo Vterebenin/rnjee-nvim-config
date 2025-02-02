@@ -18,26 +18,7 @@ require("lazy").setup({
   -- colorscheme
   { "catppuccin/nvim",   name = "catppuccin" },
   -- lazy.nvim
-  {
-    "xero/evangelion.nvim",
-    lazy = false,
-    priority = 1000,
-    init = function()
-      vim.cmd.colorscheme("evangelion")
-    end,
-  },
-  {
-    "neanias/everforest-nvim",
-    version = false,
-    lazy = false,
-    priority = 1000, -- make sure to load this before all the other start plugins
-    -- Optional; default configuration will be used if setup isn't called.
-    config = function()
-      require("everforest").setup({
-        -- Your config here
-      })
-    end,
-  },
+  { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true },
   {
     "rose-pine/neovim",
     name = "rose-pine",
