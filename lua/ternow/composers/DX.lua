@@ -1,0 +1,18 @@
+return {
+  require("ternow.plugins.gitsigns"),
+  require("ternow.plugins.neogit"),
+  require("ternow.plugins.autopairs"),
+  require("ternow.plugins.treesitter"),
+  require("ternow.plugins.typr"),
+  require("ternow.plugins.dressing"),
+  require("ternow.plugins.which-key"),
+  require("ternow.plugins.startup"),
+  require("ternow.plugins.lualine"),
+  require("ternow.plugins.barbar"),
+  require("ternow.plugins.nvim-highlight-colors"),
+  require("ternow.plugins.noice"),
+  require("ternow.plugins.spectre"),
+  require("ternow.plugins.neotree"),
+  require("ternow.plugins.telescope"),
+  require("ternow.plugins.undotree"),
+}
