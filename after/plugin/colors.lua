@@ -1,5 +1,5 @@
 function ColorMyPencils(color)
-  color = color or "gruvbox"
+  color = color or "shadow"
   vim.cmd.colorscheme(color)
 
   -- -- transparent background
@@ -7,7 +7,7 @@ function ColorMyPencils(color)
   vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
   vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none' })
   vim.api.nvim_set_hl(0, 'Pmenu', { bg = 'none' })
-  -- 
+  -- 
   vim.g.neovide_scale_factor = 1.0
   local change_scale_factor = function(delta)
     vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta

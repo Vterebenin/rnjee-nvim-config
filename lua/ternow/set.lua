@@ -23,7 +23,6 @@ vim.opt.incsearch = true
 vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
@@ -46,3 +45,23 @@ vim.cmd('autocmd VimEnter * lua Open_plugin()')
 
 vim.o.guifont = "JetBrainsMono Nerd Font Mono:h14" -- text below applies for VimScript
 
+vim.opt.numberwidth = 3
+vim.opt.signcolumn = "yes:1"
+vim.opt.statuscolumn = "%l%s"
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '',
+      [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.INFO] = '',
+      [vim.diagnostic.severity.HINT] = '',
+    },
+    numhl = {
+      [vim.diagnostic.severity.WARN] = 'WarningMsg',
+      [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+      [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
+      [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+
+    },
+  },
+})
