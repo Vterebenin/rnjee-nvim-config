@@ -47,7 +47,7 @@ vim.o.guifont = "JetBrainsMono Nerd Font Mono:h14" -- text below applies for Vim
 
 vim.opt.numberwidth = 3
 vim.opt.signcolumn = "yes:1"
-vim.opt.statuscolumn = "%l%s"
+vim.opt.statuscolumn = "%s%l"
 vim.diagnostic.config({
   signs = {
     text = {
