@@ -7,8 +7,10 @@ return {
     "nvim-treesitter/nvim-treesitter",
     "marilari88/neotest-vitest",
     "rouge8/neotest-rust",
+    'nvim-neotest/neotest-jest',
   },
   adapters = {
-    "neotest-rust"
-  }
+    "neotest-rust",
+    "neotest-jest"
+  },
 }
