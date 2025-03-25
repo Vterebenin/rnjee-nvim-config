@@ -1,82 +1,108 @@
-# My Neovim Configuration
+# Rnjee nvim config. 
 
-This thing is my Neovim configuration! This setup is nothing, but monstrosity with custom preferences without any real direction in use. 
+A highly opinionated Neovim setup that somehow works for me. Use at your own risk. It kind of grown on me. 
 
 ## Prerequisites
 
-Before getting started, make sure you have the following prerequisites installed:
-
-- Neovim (v0.5.0+ recommended)
+- Neovim (≥ 0.9 recommended)
 - Git
+- A terminal with true color support(i use [warp](https://www.warp.dev/))
 
-## Photos
+## Old Screenshots
 
-<img width="530" alt="image" src="https://github.com/Vterebenin/rnjee-nvim-config/assets/38083529/b08bb532-6ddb-40b2-b7c3-f7d9c29f3ab6">
-<img width="953" alt="image" src="https://github.com/Vterebenin/rnjee-nvim-config/assets/38083529/42853008-b123-4320-8cd9-c274a95baabb">
+| Editor View | File Browser |
+|-------------|--------------|
+| <img width="530" alt="Main Editor" src="https://github.com/Vterebenin/rnjee-nvim-config/assets/38083529/b08bb532-6ddb-40b2-b7c3-f7d9c29f3ab6"> | <img width="953" alt="NeoTree" src="https://github.com/Vterebenin/rnjee-nvim-config/assets/38083529/42853008-b123-4320-8cd9-c274a95baabb"> |
 
 ## Installation
 
-1. Clone this repository to your local machine:
+```bash
+git clone https://github.com/Vterebenin/rnjee-nvim-config ~/.config/nvim
+```
 
-    ```bash
-    git clone https://github.com/Vterebenin/rnjee-nvim-config ~/.config/nvim
-    ```
+1. Launch Neovim - plugins will auto-install via [lazy.nvim](https://github.com/folke/lazy.nvim)
+2. If nothing happens, force sync with `:Lazy sync`
+3. Verify setup with `:checkhealth lazy`
 
-2. Open Neovim and run the following command to install plugins using `lazy`:
+### API Keys (Optional)
 
-    ```vim
-    :Lazy
-    ```
+For AI features, add to your shell config:
 
-    This will automatically install and configure all the plugins specified in the configuration. (press U if nothing happened)
-    Also it worth to checkhealth on Lazy, so everything is fine.
+```bash
+export HG_API_TOKEN="your-token"       # For code-companion
+export DEEPSEEK_API_TOKEN="your-token" # For additional AI integrations
+```
 
-    ```vim
-    :checkhealth lazy
-    ```
+## Plugin Ecosystem
 
-## Plugins
+Managed by [lazy.nvim](https://github.com/folke/lazy.nvim):
 
-I use the [lazy](https://github.com/folke/lazy.nvim) plugin manager.
+**Complete list of current plugins(these are LLM descriptions):**
 
-**List of current plugins(todo: add links):**
-
-- **Plugins Included:**
-  - lazy.nvim - the manager itself
-  - LuaSnip - lua snippets and stuff
-  - lualine.nvim - another lua shit
-  - diffview.nvim - git diff view
-  - dressing.nvim - better modals
-  - gitsigns.nvim - git inline help for hunk actions
-  - neogit - git integration
-  - harpoon - feels like i was selled out by this, not really using it
-  - image.nvim - images preview
-  - kanagawa.nvim - my theme
-  - lsp-zero.nvim - this guy have a fancy chair in my plugins room
-  - mason.nvim - this is the servent of the guy above
-  - nvim-lspconfig - this is the maid of the plugins above
-  - neo-tree.nvim - my tree, but i wasn't a planter 
-  - neodev.nvim - this thing helps developing config
-  - neoformat - formatter, probably?
-  - nui.nvim - idk
-  - nvim-cmp - autocompletes
-  - nvim-treesitter - my man
-  - nvim-web-devicons - icons and shit
-  - rust-tools.nvim - uhum, rust, yep
-  - startup.nvim - my fancy startup page
-  - telescope.nvim - this thing look things up
-  - undotree - never really using it, but might come handy one day
-  - which-key.nvim - keymaps documentations
+- **Developer Experience:**
+    - **code-companion** - AI-powered coding assistance
+    - **gitsigns** - Git status in sign column
+    - **neogit** - Magit-like Git interface
+    - **autopairs** - Auto-close brackets/parentheses
+    - **treesitter** - Syntax highlighting and parsing
+    - **typr** - Typing speed analytics
+    - **dressing** - Better UI for vim inputs
+    - **which-key** - Keybindings cheat sheet
+    - **startup** - Custom startup screen
+    - **lualine** - Status line replacement
+    - **barbar** - Tab bar for buffers
+    - **nvim-highlight-colors** - Color code visualizer
+    - **noice** - Modern notification system
+    - **spectre** - Find/replace across files
+    - **neotree** - File explorer sidebar
+    - **telescope** - Fuzzy finder utility
+    - **undotree** - Visual undo history
+- **Colorschemes:**
+    - **catppuccin** – Soothing pastel color theme
+    - **gruvbox** – Retro, low-contrast color scheme
+    - **rose-pine** – Elegant muted color palette
+    - **shadow** – Subtle, soft dark theme
+- **Debug:**
+    - **nvim-dap** – Debug Adapter Protocol client  
+    - **plenary** – Lua utility functions library  
+    - **nvim-dap-ui** – UI for debugging sessions  
+- **Language servers and stuff around it:**
+    - **mason** – LSP/DAP/linter/formatter installer  
+    - **mason-lspconfig** – Mason ↔ LSP config bridge  
+    - **lsp-zero** – Simplified LSP setup helper  
+    - **lspconfig** – Official LSP client configs  
+    - **cmp-nvim-lsp** – LSP completions for nvim-cmp  
+    - **luasnip** – Snippet engine for Neovim  
+    - **rustaceanvim** – Feature-rich Rust LSP integration  
+    - **neodev** – Lua LSP development tools  
+- **Tests:**
+    - **neotest** – Extensible testing framework for Neovim  
+    - **nvim-coverage** – Code coverage visualization tool  
 
 ## Customization
 
-Customize at your own risk. I dont bother well documenting this abomination, nope, not happening.
+This config is:
+- ❌ Not beginner-friendly
+- ❌ Not minimal
+- ❌ Not well-documented
+- ✔️ Mine
+
+If you want to adapt it:
+1. Check `lua/ternow/` for module configurations
+2. Bring your own patience
 
 ## Troubleshooting
 
-If you encounter any issues or have questions, well, bad for you. Figure it out yourself. Git gud, dude.
+Common issues:
+- AI is a paid deepseek currently, configure it yourself
+- LSP not working? Run `:Mason` to install servers
+- Weird behavior? It's probably a feature
 
 ## Contributing
 
-Contributions are acceptable... If you have suggestions, improvements, or bug fixes, feel free to open a pull request.
+PRs are welcome if you:
+- Fix my terrible code
+- Add something actually useful
+- Don't break my workflow
 
+Remember: This isn't an IDE, it's my text editor with trust issues.
