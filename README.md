@@ -29,8 +29,8 @@ git clone https://github.com/Vterebenin/rnjee-nvim-config ~/.config/nvim
 For AI features, add to your shell config:
 
 ```bash
-export HG_API_TOKEN="your-token"       # For code-companion
-export DEEPSEEK_API_TOKEN="your-token" # For additional AI integrations
+export HG_API_TOKEN="your-token"       
+export DEEPSEEK_API_TOKEN="your-token" 
 ```
 
 ## Plugin Ecosystem
