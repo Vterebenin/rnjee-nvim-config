@@ -40,45 +40,49 @@ Managed by [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 **Complete list of current plugins(these are LLM descriptions):**
 
-- **Developer Experience:**
-    - **code-companion** - AI-powered coding assistance
-    - **gitsigns** - Git status in sign column
-    - **neogit** - Magit-like Git interface
-    - **autopairs** - Auto-close brackets/parentheses
-    - **treesitter** - Syntax highlighting and parsing
-    - **typr** - Typing speed analytics
-    - **dressing** - Better UI for vim inputs
-    - **which-key** - Keybindings cheat sheet
-    - **startup** - Custom startup screen
-    - **lualine** - Status line replacement
-    - **barbar** - Tab bar for buffers
-    - **nvim-highlight-colors** - Color code visualizer
-    - **noice** - Modern notification system
-    - **spectre** - Find/replace across files
-    - **neotree** - File explorer sidebar
-    - **telescope** - Fuzzy finder utility
-    - **undotree** - Visual undo history
-- **Colorschemes:**
-    - **catppuccin** – Soothing pastel color theme
-    - **gruvbox** – Retro, low-contrast color scheme
-    - **rose-pine** – Elegant muted color palette
-    - **shadow** – Subtle, soft dark theme
-- **Debug:**
-    - **nvim-dap** – Debug Adapter Protocol client  
-    - **plenary** – Lua utility functions library  
-    - **nvim-dap-ui** – UI for debugging sessions  
-- **Language servers and stuff around it:**
-    - **mason** – LSP/DAP/linter/formatter installer  
-    - **mason-lspconfig** – Mason ↔ LSP config bridge  
-    - **lsp-zero** – Simplified LSP setup helper  
-    - **lspconfig** – Official LSP client configs  
-    - **cmp-nvim-lsp** – LSP completions for nvim-cmp  
-    - **luasnip** – Snippet engine for Neovim  
-    - **rustaceanvim** – Feature-rich Rust LSP integration  
-    - **neodev** – Lua LSP development tools  
-- **Tests:**
-    - **neotest** – Extensible testing framework for Neovim  
-    - **nvim-coverage** – Code coverage visualization tool  
+### 🛠️ Developer Experience
+- **code-companion** - Your AI pair programmer (that actually listens)
+- **gitsigns** - Git blame without the shame
+- **neogit** - Git magic, now with 20% more drama
+- **autopairs** - Closing brackets so you don't have to
+- **treesitter** - Makes your code look pretty(er)
+- **typr** - Judges your typing speed mercilessly
+- **dressing** - Makes vim inputs less 1990s
+- **which-key** - "Wait, what does this do again?"
+- **startup** - Fancy dashboard to hide slow startup
+- **lualine** - Status bar with delusions of grandeur
+- **barbar** - Tabs that don't suck (mostly)
+- **nvim-highlight-colors** - Because #FF0000 should look red
+- **noice** - Notifications that won't ruin your day
+- **spectre** - Find/replace on digital steroids
+- **neotree** - File explorer for keyboard warriors
+- **telescope** - Fuzzy find everything, hell yeah
+- **undotree** - Time machine for your mistakes
+
+### 🎨 Colorschemes
+- **catppuccin** - Like drinking latte through your eyes
+- **gruvbox** - Retro vibe for hipster devs
+- **rose-pine** - "I'm a designer" mode
+- **shadow** - For when you code at 3AM
+
+### 🐞 Debug Tools
+- **nvim-dap** - Debugging without leaving your comfy editor  
+- **plenary** - Lua utilities you'll pretend to understand  
+- **nvim-dap-ui** - Makes bugs look presentable  
+
+### 💬 Language Servers & Friends
+- **mason** - App store for dev tools  
+- **mason-lspconfig** - The middleman you didn't know you needed  
+- **lsp-zero** - LSP without the configuration migraine  
+- **lspconfig** - Official way to confuse your editor  
+- **cmp-nvim-lsp** - Autocomplete that reads your mind (sometimes)  
+- **luasnip** - Code templates for lazy typists  
+- **rustaceanvim** - Makes Rust feel less rusty  
+- **neodev** - Lua knows what Lua needs  
+
+### 🧪 Testing
+- **neotest** - Tests that don't make you testy  
+- **nvim-coverage** - Shows you what you forgot to test  
 
 ## Customization
 
