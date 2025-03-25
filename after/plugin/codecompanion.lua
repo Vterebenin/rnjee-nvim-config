@@ -30,3 +30,10 @@ require("codecompanion").setup({
     end,
   },
 });
+
+local wk = require("which-key")
+wk.add({
+  { "<leader>cc", "<cmd>CodeCompanionChat<cr>", desc = "companion chat" },
+  { "<leader>ca", "<cmd>CodeCompanionActions<cr>", desc = "companion actions" },
+})
+

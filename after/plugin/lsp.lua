@@ -121,6 +121,6 @@ lsp_zero.on_attach(function(client, bufnr)
     preserve_mappings = false
   })
   wk.add({
-    { "gR", ":Telescope lsp_references<CR>", desc = "References Search" }
+    { "<leader>gr", ":Telescope lsp_references<CR>", desc = "References Search" }
   })
 end)
