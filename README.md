@@ -7,6 +7,7 @@ A highly opinionated Neovim setup that somehow works for me. Use at your own ris
 - Neovim (≥ 0.9 recommended)
 - Git
 - A terminal with true color support(i use [warp](https://www.warp.dev/))
+- ripgrep
 
 ## Old Screenshots
 
