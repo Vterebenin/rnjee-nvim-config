@@ -8,7 +8,7 @@ wk.add({
   { "<leader>S",  '<cmd>lua require("spectre").toggle()<CR>', desc = "Toggle Spectre" },
   { "<leader>sw",  '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', desc = "Search Current word" },
   { '<leader>sp',  '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', desc = "Search on current file" },
-  { "<leader>x",  "<cmd>!chmod +x %<CR>", desc = "Make Executable", silent = true },
+  { "<leader>Z",  "<cmd>!chmod +x %<CR>", desc = "Make Executable", silent = true },
   { "<leader>l",  group = "LSP" },
   { "<leader>la",  ":lua runCodeAction()<CR>", desc = "Code Action", noremap = true },
   { "<leader>lf",  ":lua formatCode()<CR>", desc = "Code Format", noremap = true },

@@ -1,7 +1,21 @@
-require 'lspconfig'.volar.setup {
+local lspconfig = require('lspconfig')
+lspconfig.volar.setup {
   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
 }
 local lsp_zero = require('lsp-zero')
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    "documentation",
+    "detail",
+    "additionalTextEdits",
+  },
+}
+lspconfig.cssls.setup {
+  capabilities = capabilities,
+}
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -11,10 +25,10 @@ require('mason-lspconfig').setup({
   },
   handlers = {
     function(server_name)
-      require('lspconfig')[server_name].setup({})
+      lspconfig[server_name].setup({})
     end,
     volar = function()
-      require('lspconfig').volar.setup({})
+      lspconfig.volar.setup({})
     end,
     ts_ls = function()
       local vue_typescript_plugin = require('mason-registry')
@@ -23,7 +37,7 @@ require('mason-lspconfig').setup({
           .. '/node_modules/@vue/language-server'
           .. '/node_modules/@vue/typescript-plugin'
 
-      require('lspconfig').ts_ls.setup({
+      lspconfig.ts_ls.setup({
         init_options = {
           plugins = {
             {
@@ -121,6 +135,6 @@ lsp_zero.on_attach(function(client, bufnr)
     preserve_mappings = false
   })
   wk.add({
-    { "<leader>gr", ":Telescope lsp_references<CR>", desc = "References Search" }
+    { "gR", ":Telescope lsp_references<CR>", desc = "References Search" }
   })
 end)
