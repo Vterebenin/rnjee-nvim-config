@@ -4,19 +4,6 @@ lspconfig.volar.setup {
 }
 local lsp_zero = require('lsp-zero')
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    "documentation",
-    "detail",
-    "additionalTextEdits",
-  },
-}
-lspconfig.cssls.setup {
-  capabilities = capabilities,
-}
-
 require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = {
@@ -138,3 +125,21 @@ lsp_zero.on_attach(function(client, bufnr)
     { "gR", ":Telescope lsp_references<CR>", desc = "References Search" }
   })
 end)
+
+
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- capabilities.textDocument.completion.completionItem.resolveSupport = {
+--   properties = {
+--     "documentation",
+--     "detail",
+--     "additionalTextEdits",
+--   },
+-- }
+-- lspconfig.cssls.setup {
+--   capabilities = capabilities,
+-- }
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+require 'lspconfig'.cssls.setup {
+  capabilities = capabilities,
+}
