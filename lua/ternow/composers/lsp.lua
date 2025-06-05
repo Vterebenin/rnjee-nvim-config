@@ -7,6 +7,7 @@ return {
   require("ternow.plugins.nvim-cmp"),
   -- TODO: do i need this one below?
   require("ternow.plugins.luasnip"),
+  require("ternow.plugins.sonarlint"),
   require("ternow.plugins.rustaceanvim"),
   require("ternow.plugins.neodev"),
 }

@@ -6,6 +6,8 @@ require('telescope').setup {
       local tail = require("telescope.utils").path_tail(path)
       return string.format("%s (%s)", tail, path), { { { 1, #tail }, "Constant" } }
     end,
+    layout_strategy = "vertical",
+    layout_config = { height = 0.95 },
   }
 }
 

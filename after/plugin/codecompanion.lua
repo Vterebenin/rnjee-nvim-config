@@ -66,6 +66,40 @@ require("codecompanion").setup({
         },
       },
     },
+    ["Create vitest unit tests (VUE)"] = {
+      strategy = "chat",
+      description = "Implement vitest unit tests for selected vue 3 code",
+      opts = {
+        modes = { "v" },
+        short_name = "expert",
+        auto_submit = true,
+        stop_context_insertion = true,
+      },
+      prompts = {
+        {
+          role = "system",
+          content = function(context)
+            return "I want you to act as a senior "
+                .. context.filetype
+                .. " developer. I will ask you specific questions and I want you to return explanations and codeblock examples."
+                .. "make sure that you wrote a good idiomatic "
+                .. context.filetype
+                .. " code"
+          end,
+        },
+        {
+          role = "user",
+          content = function(context)
+            local text = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
+
+            return "Make vitest unit tests for this vue code :\n\n```" .. context.filetype .. "\n" .. text .. "\n```\n\n"
+          end,
+          opts = {
+            contains_code = true,
+          }
+        },
+      },
+    },
     ["Create jest unit tests"] = {
       strategy = "chat",
       description = "Implement jest unit tests for selected code",
