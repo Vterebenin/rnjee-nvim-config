@@ -143,3 +143,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 require 'lspconfig'.cssls.setup {
   capabilities = capabilities,
 }
+require("lspconfig")["gdscript"].setup({
+    name = "godot",
+    cmd = vim.lsp.rpc.connect("127.0.0.1", "6005"),
+  })

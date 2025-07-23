@@ -43,7 +43,9 @@ end
 -- Automatically call the function on VimEnter
 vim.cmd('autocmd VimEnter * lua Open_plugin()')
 
-vim.o.guifont = "JetBrainsMono Nerd Font Mono:h14" -- text below applies for VimScript
+-- vim.o.guifont = "JetBrainsMono Nerd Font Mono:h14" -- text below applies for VimScript
+vim.o.guifont = "Maple Mono:h12"
+vim.opt.guifont = "Maple Mono:h12"  -- For GUI clients
 
 vim.opt.numberwidth = 3
 vim.opt.signcolumn = "yes:1"
