@@ -143,7 +143,23 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 require 'lspconfig'.cssls.setup {
   capabilities = capabilities,
 }
+-- Disable formatting capabilities for GDScript to prevent LSP from overriding tab settings
+local gdscript_capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+gdscript_capabilities.textDocument.formatting = false
+gdscript_capabilities.textDocument.rangeFormatting = false
+
 require("lspconfig")["gdscript"].setup({
     name = "godot",
     cmd = vim.lsp.rpc.connect("127.0.0.1", "6005"),
+    capabilities = gdscript_capabilities,
+    on_attach = function(client, bufnr)
+      -- Call the default on_attach function first
+      lsp_zero.on_attach(client, bufnr)
+
+      -- Ensure GDScript-specific settings are preserved after LSP attaches
+      vim.opt_local.expandtab = false
+      vim.opt_local.tabstop = 4
+      vim.opt_local.shiftwidth = 4
+      vim.opt_local.softtabstop = 4
+    end,
   })

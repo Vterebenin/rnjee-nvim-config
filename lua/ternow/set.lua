@@ -33,6 +33,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   group = vim.api.nvim_create_augroup('MyAutocmdsJavaScripFormatting', {}),
 })
 
+
 function Open_plugin()
     local cmd_args = vim.fn.argc()
     if cmd_args > 0 then
