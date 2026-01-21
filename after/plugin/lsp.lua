@@ -5,46 +5,21 @@ lspconfig.volar.setup {
 local lsp_zero = require('lsp-zero')
 
 require('mason').setup({})
-require('mason-lspconfig').setup({
-  ensure_installed = {
-    'ts_ls',
-    'volar',
-  },
-  handlers = {
-    function(server_name)
-      lspconfig[server_name].setup({})
-    end,
-    volar = function()
-      lspconfig.volar.setup({})
-    end,
-    ts_ls = function()
-      local vue_typescript_plugin = require('mason-registry')
-          .get_package('vue-language-server')
-          :get_install_path()
-          .. '/node_modules/@vue/language-server'
-          .. '/node_modules/@vue/typescript-plugin'
 
-      lspconfig.ts_ls.setup({
-        init_options = {
-          plugins = {
-            {
-              name = "@vue/typescript-plugin",
-              location = vue_typescript_plugin,
-              languages = { 'javascript', 'typescript', 'vue' }
-            },
-          }
-        },
-        filetypes = {
-          'javascript',
-          'javascriptreact',
-          'javascript.jsx',
-          'typescript',
-          'typescriptreact',
-          'typescript.tsx',
-          'vue',
-        },
-      })
-    end,
+-- Skip mason-lspconfig setup due to compatibility issue with Neovim 0.10
+-- Configure LSP servers directly instead
+lspconfig.volar.setup {}
+
+-- Simplified ts_ls setup without vue typescript plugin to avoid registry issues
+lspconfig.ts_ls.setup({
+  filetypes = {
+    'javascript',
+    'javascriptreact',
+    'javascript.jsx',
+    'typescript',
+    'typescriptreact',
+    'typescript.tsx',
+    'vue',
   },
 })
 
@@ -112,8 +87,6 @@ cmp.setup({
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 
-lsp_zero.setup()
-
 local wk = require("which-key")
 
 lsp_zero.on_attach(function(client, bufnr)
@@ -125,6 +98,9 @@ lsp_zero.on_attach(function(client, bufnr)
     { "gR", ":Telescope lsp_references<CR>", desc = "References Search" }
   })
 end)
+
+-- Setup lsp-zero after configuring servers
+lsp_zero.setup()
 
 
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
