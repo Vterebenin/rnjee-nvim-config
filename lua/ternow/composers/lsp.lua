@@ -10,4 +10,5 @@ return {
   require("ternow.plugins.sonarlint"),
   require("ternow.plugins.rustaceanvim"),
   require("ternow.plugins.neodev"),
+  require("ternow.plugins.habamax-godot"),
 }

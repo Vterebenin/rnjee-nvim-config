@@ -1,17 +1,36 @@
-local lspconfig = require('lspconfig')
-lspconfig.volar.setup {
-  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
-}
 local lsp_zero = require('lsp-zero')
 
-require('mason').setup({})
+require('mason').setup({
+  ui = {
+    border = 'rounded',
+    icons = {
+      package_installed = '✓',
+      package_pending = '➜',
+      package_uninstalled = '✗',
+    },
+  },
+  log_level = vim.log.levels.ERROR,
+})
 
--- Skip mason-lspconfig setup due to compatibility issue with Neovim 0.10
--- Configure LSP servers directly instead
-lspconfig.volar.setup {}
+require('mason-lspconfig').setup({
+  automatic_enable = false,
+  ensure_installed = {
+    'ts_ls',
+    'cssls',
+    'html',
+    'jsonls',
+    'lua_ls',
+  },
+})
 
--- Simplified ts_ls setup without vue typescript plugin to avoid registry issues
-lspconfig.ts_ls.setup({
+local lspconfig_defaults = require('lspconfig').util.default_config
+lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+  'force',
+  lspconfig_defaults.capabilities,
+  require('cmp_nvim_lsp').default_capabilities()
+)
+
+vim.lsp.config('ts_ls', {
   filetypes = {
     'javascript',
     'javascriptreact',
@@ -22,6 +41,12 @@ lspconfig.ts_ls.setup({
     'vue',
   },
 })
+
+
+vim.lsp.config('cssls', {})
+vim.lsp.config('html', {})
+vim.lsp.config('jsonls', {})
+vim.lsp.config('lua_ls', {})
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -39,7 +64,6 @@ cmp.setup({
     expandable_indicator = true,
     fields = { "abbr", "menu", "kind" },
     format = function(entry, item)
-      -- Define menu shorthand for different completion sources.
       local menu_icon = {
         nvim_lsp = "NLSP",
         nvim_lua = "NLUA",
@@ -47,34 +71,14 @@ cmp.setup({
         buffer   = "BUFF",
         path     = "PATH",
       }
-      -- Set the menu "icon" to the shorthand for each completion source.
       item.menu = menu_icon[entry.source.name]
-
-      -- Set the fixed width of the completion menu to 60 characters.
-      -- fixed_width = 20
-
-      -- Set 'fixed_width' to false if not provided.
       fixed_width = fixed_width or false
-
-      -- Get the completion entry text shown in the completion window.
       local content = item.abbr
-
-      -- Set the fixed completion window width.
       if fixed_width then
         vim.o.pumwidth = fixed_width
       end
-
-      -- Get the width of the current window.
       local win_width = vim.api.nvim_win_get_width(0)
-
-      -- Set the max content width based on either: 'fixed_width'
-      -- or a percentage of the window width, in this case 20%.
-      -- We subtract 10 from 'fixed_width' to leave room for 'kind' fields.
       local max_content_width = fixed_width and fixed_width - 10 or math.floor(win_width * 0.2)
-
-      -- Truncate the completion entry text if it's longer than the
-      -- max content width. We subtract 3 from the max content width
-      -- to account for the "..." that will be appended to it.
       if #content > max_content_width then
         item.abbr = vim.fn.strcharpart(content, 0, max_content_width - 3) .. "..."
       else
@@ -83,6 +87,13 @@ cmp.setup({
       return item
     end,
   },
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lua' },
+    { name = 'luasnip' },
+    { name = 'buffer' },
+    { name = 'path' },
+  }),
 })
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
@@ -99,43 +110,26 @@ lsp_zero.on_attach(function(client, bufnr)
   })
 end)
 
--- Setup lsp-zero after configuring servers
 lsp_zero.setup()
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'gdscript',
+  callback = function()
+    local gdscript_capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+    gdscript_capabilities.textDocument.formatting = false
+    gdscript_capabilities.textDocument.rangeFormatting = false
 
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
--- capabilities.textDocument.completion.completionItem.resolveSupport = {
---   properties = {
---     "documentation",
---     "detail",
---     "additionalTextEdits",
---   },
--- }
--- lspconfig.cssls.setup {
---   capabilities = capabilities,
--- }
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-require 'lspconfig'.cssls.setup {
-  capabilities = capabilities,
-}
--- Disable formatting capabilities for GDScript to prevent LSP from overriding tab settings
-local gdscript_capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-gdscript_capabilities.textDocument.formatting = false
-gdscript_capabilities.textDocument.rangeFormatting = false
-
-require("lspconfig")["gdscript"].setup({
-    name = "godot",
-    cmd = vim.lsp.rpc.connect("127.0.0.1", "6005"),
-    capabilities = gdscript_capabilities,
-    on_attach = function(client, bufnr)
-      -- Call the default on_attach function first
-      lsp_zero.on_attach(client, bufnr)
-
-      -- Ensure GDScript-specific settings are preserved after LSP attaches
-      vim.opt_local.expandtab = false
-      vim.opt_local.tabstop = 4
-      vim.opt_local.shiftwidth = 4
-      vim.opt_local.softtabstop = 4
-    end,
-  })
+    vim.lsp.start({
+      name = 'gdscript',
+      cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
+      capabilities = gdscript_capabilities,
+      on_attach = function(client, bufnr)
+        lsp_zero.on_attach(client, bufnr)
+        vim.opt_local.expandtab = false
+        vim.opt_local.tabstop = 4
+        vim.opt_local.shiftwidth = 4
+        vim.opt_local.softtabstop = 0
+      end,
+    })
+  end,
+})
