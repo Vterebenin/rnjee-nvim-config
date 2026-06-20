@@ -112,24 +112,35 @@ end)
 
 lsp_zero.setup()
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'gdscript',
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "gdscript",
   callback = function()
-    local gdscript_capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-    gdscript_capabilities.textDocument.formatting = false
-    gdscript_capabilities.textDocument.rangeFormatting = false
-
-    vim.lsp.start({
-      name = 'gdscript',
-      cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
-      capabilities = gdscript_capabilities,
-      on_attach = function(client, bufnr)
-        lsp_zero.on_attach(client, bufnr)
-        vim.opt_local.expandtab = false
-        vim.opt_local.tabstop = 4
-        vim.opt_local.shiftwidth = 4
-        vim.opt_local.softtabstop = 0
-      end,
-    })
+    vim.cmd("setlocal noexpandtab")
+    vim.cmd("setlocal tabstop=4")
+    vim.cmd("setlocal shiftwidth=4")
+    vim.cmd("setlocal softtabstop=0")
   end,
+  group = vim.api.nvim_create_augroup("GDScriptIndent", { clear = true }),
 })
+
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = 'gdscript',
+--   callback = function()
+--     local gdscript_capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+--     gdscript_capabilities.textDocument.formatting = false
+--     gdscript_capabilities.textDocument.rangeFormatting = false
+-- 
+--     vim.lsp.start({
+--       name = 'gdscript',
+--       cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
+--       capabilities = gdscript_capabilities,
+--       on_attach = function(client, bufnr)
+--         lsp_zero.on_attach(client, bufnr)
+--         vim.opt_local.expandtab = false
+--         vim.opt_local.tabstop = 4
+--         vim.opt_local.shiftwidth = 4
+--         vim.opt_local.softtabstop = 0
+--       end,
+--     })
+--   end,
+-- })

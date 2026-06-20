@@ -6,7 +6,6 @@ vim.opt.relativenumber = true
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 
@@ -24,6 +23,7 @@ vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
 vim.opt.isfname:append("@-@")
+
 
 vim.opt.updatetime = 50
 
@@ -45,8 +45,8 @@ end
 vim.cmd('autocmd VimEnter * lua Open_plugin()')
 
 -- vim.o.guifont = "JetBrainsMono Nerd Font Mono:h14" -- text below applies for VimScript
-vim.o.guifont = "Maple Mono:h12"
-vim.opt.guifont = "Maple Mono:h12"  -- For GUI clients
+vim.o.guifont = "JetBrainsMono Nerd Font Mono:h12"
+vim.opt.guifont = "JetBrainsMono Nerd Font Mono:h12"
 
 vim.opt.numberwidth = 3
 vim.opt.signcolumn = "yes:1"
@@ -68,3 +68,11 @@ vim.diagnostic.config({
     },
   },
 })
+
+vim.opt.list = true
+vim.opt.listchars = {
+  tab = '» ',   -- Display tabs as » followed by spaces
+  space = '·',  -- Display all spaces as middle dots
+  trail = '×',  -- Display trailing spaces as ×
+  nbsp = '␣',   -- Display non-breaking spaces as ␣
+}
