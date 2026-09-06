@@ -34,6 +34,50 @@ export HG_API_TOKEN="your-token" # huggingface token
 export DEEPSEEK_API_TOKEN="your-token" # deepseek token
 ```
 
+## Godot + Neovim Integration
+
+Use Neovim as an external editor for [Godot 4](https://godotengine.org/). Click a script in Godot and it opens directly in your running Neovim instance (with cursor on the correct line).
+
+### Dependencies
+
+- `nvr` ([neovim-remote](https://github.com/mhinz/neovim-remote)) - comes preinstalled in `~/.local/share/nvr-venv` on this setup
+- A GUI terminal (defaults to `alacritty`)
+
+### Setup
+
+Two helper scripts live in `~/.local/bin/`:
+
+1. **`godotdev`** - Start Neovim as a server. Call this instead of plain `nvim` so Godot can talk to it. Cleans up stale sockets after crashes automatically.
+
+```bash
+~/.local/bin/godotdev
+```
+
+2. **`godot-nvr.sh`** - The launcher Godot calls to open files in your running Neovim.
+
+### Godot Settings
+
+1. In Godot: `Editor > Editor Settings > Text Editor > External`
+2. Enable **Use External Editor**
+3. Set **Exec Path** to: `/home/$USER/.local/bin/godot-nvr.sh`
+4. Set **Exec Flags** to: `+{line} {file}`
+
+> Options: use `--vsplit +{line} {file}` for vertical splits, or `--tab +{line} {file}` for tabs. Pass a terminal name as the first arg to override the default (e.g. `ghostty +{line} {file}`).
+
+### Workflow
+
+1. Start Godot with TCP LSP enabled: `Editor Settings > Network > Enable TCP LSP server`
+2. Launch Neovim with `~/.local/bin/godotdev`
+3. Click a script in Godot -> opens in your Neovim instance, focused and scrolled to the line
+
+### Troubleshooting
+
+- `command not found: nvr` - make sure `~/.local/share/nvr-venv/bin` is on your `$PATH` or set `NVR=/path/to/nvr`
+- "Neovim server already running" after quitting - stale socket; run `rm -f /tmp/godot.pipe`
+- Godot shows "Cannot execute" - ensure the script is executable: `chmod +x ~/.local/bin/godot-nvr.sh`
+
+For a full-featured Godot LSP/DAP experience, see [godotdev.nvim](https://github.com/Mathijs-Bakker/godotdev.nvim).
+
 ## Plugin Ecosystem
 
 Managed by [lazy.nvim](https://github.com/folke/lazy.nvim):
