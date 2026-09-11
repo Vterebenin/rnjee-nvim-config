@@ -6,8 +6,9 @@ A highly opinionated Neovim setup that somehow works for me. Use at your own ris
 
 - Neovim (≥ 0.9 recommended)
 - Git
-- A terminal with true color support(i use [warp](https://www.warp.dev/))
+- A terminal with true color support (ghostty on this machine)
 - ripgrep
+- Godot 4.x (for the godotdev setup below)
 
 ## Old Screenshots
 
@@ -25,6 +26,15 @@ git clone https://github.com/Vterebenin/rnjee-nvim-config ~/.config/nvim
 2. If nothing happens, force sync with `:Lazy sync`
 3. Verify setup with `:checkhealth lazy`
 
+> 💡 **Treesitter pin:** this config uses the old `nvim-treesitter.configs` API, which
+> requires `nvim-treesitter = v0.9.2`. `lazy-lock.json` already pins it there, so nothing
+> to do. If `:Lazy sync` ever reverts it to `main`, fix with:
+> ```bash
+> git -C ~/.local/share/nvim/lazy/nvim-treesitter fetch --tags --force \
+>   && git -C ~/.local/share/nvim/lazy/nvim-treesitter checkout v0.9.2
+> ```
+> Then install parsers with `:TSInstallSync gdscript godot_resource javascript typescript lua`.
+
 ### API Keys (Optional)
 
 For AI features, add to your shell config:
@@ -34,49 +44,173 @@ export HG_API_TOKEN="your-token" # huggingface token
 export DEEPSEEK_API_TOKEN="your-token" # deepseek token
 ```
 
-## Godot + Neovim Integration
+## 🎮 Godot Development (godotdev.nvim)
 
-Use Neovim as an external editor for [Godot 4](https://godotengine.org/). Click a script in Godot and it opens directly in your running Neovim instance (with cursor on the correct line).
+This config ships a working godotdev.nvim setup:
+- `lua/ternow/plugins/habamax-godot.lua` — plugin wired up (`nvim-dap`, `nvim-dap-ui`, `nvim-treesitter` deps)
+- `after/plugin/dap.lua` — Godot debug adapter on port **6006** + DAP UI auto open/close
+- `after/plugin/lsp.lua` / `after/ftplugin/gdscript.lua` — gdscript indent settings (spaces, 4 wide)
 
-### Dependencies
+### Godot → Neovim external editor ("session" scripts)
 
-- `nvr` ([neovim-remote](https://github.com/mhinz/neovim-remote)) - comes preinstalled in `~/.local/share/nvr-venv` on this setup
-- A GUI terminal (defaults to `alacritty`)
+Two scripts live in `~/.local/bin` (already on PATH). They create a Neovim *session*
+socket so Godot can click-open scripts into the already-running Neovim and focus its
+terminal window. This works purely with nvim 0.12's native `--remote-send` / `--remote-expr`
+— **no `nvr` (neovim-remote) install needed**.
 
-### Setup
-
-Two helper scripts live in `~/.local/bin/`:
-
-1. **`godotdev`** - Start Neovim as a server. Call this instead of plain `nvim` so Godot can talk to it. Cleans up stale sockets after crashes automatically.
+**`~/.local/bin/godotdev.sh`** — starts the Neovim session (`nvim --listen /tmp/godot.nvim`), recovers stale sockets, and reuses an existing session:
 
 ```bash
-~/.local/bin/godotdev
+#!/usr/bin/env bash
+set -euo pipefail
+
+SOCKET="${GODOT_NVIM_SOCKET:-/tmp/godot.nvim}"
+
+if [[ -S "$SOCKET" ]]; then
+  if nvim --server "$SOCKET" --remote-expr '1' >/dev/null 2>&1; then
+    echo "Neovim server already running at $SOCKET"
+    exit 0
+  fi
+
+  echo "Removing stale socket: $SOCKET"
+  rm -f "$SOCKET"
+fi
+
+printf '\033]0;Godot-Neovim\007' # mark this terminal window
+exec nvim --listen "$SOCKET" "$@"
 ```
 
-2. **`godot-nvr.sh`** - The launcher Godot calls to open files in your running Neovim.
+**`~/.local/bin/godot-nvr.sh`** — launcher called by Godot; opens `{file}` (optionally at `+{line}`) in the session and focuses the terminal window:
 
-### Godot Settings
+```bash
+#!/usr/bin/env bash
+# Godot → Neovim launcher with GUI terminal focus
+# Usage:
+#   godot-nvr.sh [terminal_name] +{line} {file} [--tab|--vsplit]
 
-1. In Godot: `Editor > Editor Settings > Text Editor > External`
-2. Enable **Use External Editor**
-3. Set **Exec Path** to: `/home/$USER/.local/bin/godot-nvr.sh`
-4. Set **Exec Flags** to: `+{line} {file}`
+# -----------------------------
+# Arguments
+# -----------------------------
+DEFAULT_TERMINAL="ghostty"
+ARG0="${1:-}"
 
-> Options: use `--vsplit +{line} {file}` for vertical splits, or `--tab +{line} {file}` for tabs. Pass a terminal name as the first arg to override the default (e.g. `ghostty +{line} {file}`).
+if [[ -n "$ARG0" && "$ARG0" != +* && "$ARG0" != --* && ! -f "$ARG0" ]]; then
+  # First argument is terminal name
+  GODOT_TERMINAL="$ARG0"
+  shift
+else
+  # No terminal argument provided, use default
+  GODOT_TERMINAL="$DEFAULT_TERMINAL"
+fi
+
+SOCKET="${GODOT_NVIM_SOCKET:-/tmp/godot.nvim}" # Neovim socket path
+
+if ! nvim --server "$SOCKET" --remote-expr '1' >/dev/null 2>&1; then
+  echo "No Neovim server listening on $SOCKET (start one with godotdev.sh or nvim --listen $SOCKET)" >&2
+  exit 1
+fi
+
+OPEN_MODE="window"
+LINE=""
+FILE=""
+
+# -----------------------------
+# Parse remaining arguments
+# -----------------------------
+while [[ $# -gt 0 ]]; do
+   case "$1" in
+     --tab) OPEN_MODE="tab"; shift ;;
+     --vsplit) OPEN_MODE="vsplit"; shift ;;
+     +[0-9]*) LINE="${1#+}"; shift ;;
+     *) FILE="$1"; shift ;;
+   esac
+done
+
+[ -z "$FILE" ] && exit 0
+
+# -----------------------------
+# Open file in Neovim
+# -----------------------------
+FILE_VIM="${FILE//\'/\'\\\'\'}"
+case "$OPEN_MODE" in
+  window) CMD=":execute 'edit ' . fnameescape('${FILE_VIM}')" ;;
+  tab) CMD=":execute 'tabedit ' . fnameescape('${FILE_VIM}')" ;;
+  vsplit) CMD=":execute 'vsplit ' . fnameescape('${FILE_VIM}')" ;;
+esac
+
+[ -n "$LINE" ] && CMD="$CMD | call cursor($LINE,1)"
+CMD="$CMD | normal! zz"
+
+nvim --server "$SOCKET" --remote-send "<C-\\><C-N>${CMD}<CR>"
+
+# -----------------------------
+# Focus the Neovim terminal window
+# -----------------------------
+if command -v hyprctl >/dev/null 2>&1; then
+  # Lua-config Hyprland (0.55+) — use the structured dispatcher API
+  hyprctl dispatch 'hl.dsp.focus({ window = "title:^Godot-Neovim$" })' >/dev/null 2>&1 \
+    || hyprctl dispatch 'hl.dsp.focus({ window = "class:^(com.mitchellh.ghostty)$" })' >/dev/null 2>&1 \
+    || hyprctl dispatch "focuswindow class:^(com\\.mitchellh\\.ghostty|ghostty)$" >/dev/null 2>&1 \
+    || true
+fi
+
+# Focus GUI terminal (macOS only; no-op elsewhere)
+if command -v osascript >/dev/null 2>&1; then
+  osascript -e "tell application \"$GODOT_TERMINAL\" to activate"
+fi
+```
+
+Recreate both on a fresh machine with:
+
+```bash
+touch ~/.local/bin/godotdev.sh ~/.local/bin/godot-nvr.sh  # then paste contents
+chmod +x ~/.local/bin/godotdev.sh ~/.local/bin/godot-nvr.sh
+```
+
+> ⚠️ **Hyprland 0.55+ focus note:** `hyprctl dispatch focuswindow ...` (legacy syntax)
+> no longer works on Lua-config Hyprland — it must use the structured API
+> `hyprctl dispatch 'hl.dsp.focus({ window = "..." })'`. The script above already does
+> this with a legacy fallback. If your WM isn't Hyprland, that block is a no-op.
+
+### Godot editor settings
+
+Enable **Advanced Settings** (top of the dialog), then set:
+
+| Setting | Value |
+|---|---|
+| `Text Editor → External → Exec Path` | `/home/rnjee/.local/bin/godot-nvr.sh` |
+| `Text Editor → External → Exec Flags` | `+{line} {file}` (or `--tab +{line} {file}` / `--vsplit +{line} {file}`) |
+| `Network → Enable TCP LSP server` | ✅ on (required for GDScript LSP) |
+
+Recommended (optional):
+- `Text Editor → Behavior → Auto Reload Scripts on External Change`
+- `Interface → Editor → Save on Focus Loss`
+- `Interface → Editor → Import Resources When Unfocused`
 
 ### Workflow
 
-1. Start Godot with TCP LSP enabled: `Editor Settings > Network > Enable TCP LSP server`
-2. Launch Neovim with `~/.local/bin/godotdev`
-3. Click a script in Godot -> opens in your Neovim instance, focused and scrolled to the line
+```bash
+godotdev.sh                      # 1. start the nvim session (in ghostty, or ghostty -e ~/.local/bin/godotdev.sh)
+godot-nvr.sh +10 path/file.gd    # 2. test manually; opens file at line 10 + focuses ghostty
+```
+Then click any script in Godot → opens in the session, ghostty window comes to the front.
 
-### Troubleshooting
+### Debugging (DAP)
 
-- `command not found: nvr` - make sure `~/.local/share/nvr-venv/bin` is on your `$PATH` or set `NVR=/path/to/nvr`
-- "Neovim server already running" after quitting - stale socket; run `rm -f /tmp/godot.pipe`
-- Godot shows "Cannot execute" - ensure the script is executable: `chmod +x ~/.local/bin/godot-nvr.sh`
+Already configured. Keymaps (from `after/plugin/dap.lua`):
+- `<leader>dt` — toggle breakpoint, `<leader>dx` — terminate
+- `<leader>do` — step over, `<leader>du` — step out
+- Launch config "Launch scene" (port 6006); Godot must be running the project.
 
-For a full-featured Godot LSP/DAP experience, see [godotdev.nvim](https://github.com/Mathijs-Bakker/godotdev.nvim).
+### Also handy
+
+- `:GodotRunProject`, `:GodotRunCurrentScene`, `:GodotReconnectLSP`, `:GodotDocs <Class>`
+- `:checkhealth godotdev` — verify everything
+- Optional formatter: install `gdscript-formatter` (or `gdformat`) for autoformat-on-save
+  of `.gd` files, otherwise you'll get a warning notification.
+- **Blender (this machine):** installed via Steam at
+  `~/.local/share/Steam/steamapps/common/Blender/blender` (v5.2). Not on PATH;
+  symlink it if you want it global.
 
 ## Plugin Ecosystem
 
@@ -148,6 +282,11 @@ Common issues:
 - AI is a paid deepseek currently, configure it
 - LSP not working? Run `:Mason` to install servers
 - Weird behavior? It's probably a feature
+- Godot LSP won't attach? Godot editor must be running AND `Network → Enable TCP LSP server` must be on
+- "No Neovim server listening on /tmp/godot.nvim"? Start the session with `godotdev.sh` first
+- Treesitter broken after `:Lazy sync`? Re-pin to v0.9.2 (see Installation notes)
+- Godot shows "Cannot execute"? `chmod +x ~/.local/bin/godot-nvr.sh` and use the absolute path
+- Unknown `.gd` filetype? Check `ftdetect/gdscript.lua` is present after clone
 
 ## Contributing
 
