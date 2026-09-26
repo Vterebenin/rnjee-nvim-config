@@ -48,6 +48,8 @@ vim.lsp.config('html', {})
 vim.lsp.config('jsonls', {})
 vim.lsp.config('lua_ls', {})
 
+vim.lsp.enable({ 'ts_ls', 'cssls', 'html', 'jsonls', 'lua_ls' })
+
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
