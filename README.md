@@ -44,6 +44,22 @@ export HG_API_TOKEN="your-token" # huggingface token
 export DEEPSEEK_API_TOKEN="your-token" # deepseek token
 ```
 
+## OpenCode
+
+Open Neovim in the project folder (`nvim .`). `<leader>oo` starts OpenCode in that git root, on a port reserved for that folder, so prompts and file edits stay in the project. Save first — OpenCode reads files from disk.
+
+| Key | Action |
+|-----|--------|
+| `<leader>oo` | Open or focus the project session |
+| `<leader>ot` | Hand it a task. In visual mode the selection is included |
+| `<leader>os` | Delegate a prepared chore (implement, fix, test, review, …) |
+| `<leader>oq` | Stop the task it is running |
+| `<leader>oc` | Close the session window and stop OpenCode. Your file tab stays open |
+| `Esc` `Esc` | Leave the terminal and return to the previous window |
+| `<A-k>` / `<A-j>` | Scroll the session up or down |
+
+Edit review uses `da` / `dr` to accept or reject. `:checkhealth opencode` after a restart.
+
 ## 🎮 Godot Development (godotdev.nvim)
 
 This config ships a working godotdev.nvim setup:
@@ -220,6 +236,7 @@ Managed by [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ### 🛠️ Developer Experience
 - **code-companion** - My AI pair programmer (he actually listens)
+- **opencode.nvim** - OpenCode in the editor (`<leader>o`)
 - **gitsigns** - Git alchemy
 - **neogit** - Git magic
 - **autopairs** - Closing brackets so i don't have to
@@ -280,6 +297,7 @@ If you want to adapt it:
 
 Common issues:
 - AI is a paid deepseek currently, configure it
+- OpenCode missing? `opencode` must be on PATH; then `:checkhealth opencode`
 - LSP not working? Run `:Mason` to install servers
 - Weird behavior? It's probably a feature
 - Godot LSP won't attach? Godot editor must be running AND `Network → Enable TCP LSP server` must be on

@@ -1,5 +1,6 @@
 return {
   require("ternow.plugins.code-companion"),
+  require("ternow.plugins.opencode"),
   require("ternow.plugins.gitsigns"),
   require("ternow.plugins.neogit"),
   require("ternow.plugins.autopairs"),

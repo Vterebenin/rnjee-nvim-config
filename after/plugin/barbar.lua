@@ -1,7 +1,7 @@
 local wk = require("which-key")
 
 wk.add({
-  { "<leader>b", name = "buffer" },
+  { "<leader>b", group = "Buffers" },
   { "<leader>bb", "<Cmd>BufferOrderByBufferNumber<CR>", desc = "order by buffer number" },
   { "<leader>bn", "<Cmd>BufferOrderByName<CR>", desc = "order by name" },
   { "<leader>bd", "<Cmd>BufferOrderByDirectory<CR>", desc = "order by directory" },
